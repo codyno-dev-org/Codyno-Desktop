@@ -1,52 +1,16 @@
 use std::path::PathBuf;
 use std::sync::{Arc, RwLock};
 
-#[cfg(feature = "aws-providers")]
-use super::bedrock::BedrockProvider;
-#[cfg(feature = "local-inference")]
-use super::local_inference::LocalInferenceProvider;
-#[cfg(feature = "aws-providers")]
-use super::sagemaker_tgi::SageMakerTgiProvider;
+// CodyNo: only the LiteLLM provider is imported — every other provider import
+// went with the registrations in init_registry().
 use super::{
-    amp_acp::AmpAcpProvider,
-    avian::AvianProvider,
-    azure::AzureProvider,
     base::{Provider, ProviderMetadata},
-    chatgpt_codex::ChatGptCodexProvider,
-    claude_acp::ClaudeAcpProvider,
-    claude_code::ClaudeCodeProvider,
-    codex::CodexProvider,
-    codex_acp::CodexAcpProvider,
-    copilot_acp::CopilotAcpProvider,
-    cursor_agent::CursorAgentProvider,
-    gcpvertexai::GcpVertexAIProvider,
-    gemini_cli::GeminiCliProvider,
-    gemini_oauth::GeminiOAuthProvider,
-    githubcopilot::GithubCopilotProvider,
-    gondola::GondolaProvider,
-    huggingface::HuggingFaceProvider,
-    kimicode::KimiCodeProvider,
     litellm::LiteLLMProvider,
-    nanogpt::NanoGptProvider,
-    pi_acp::PiAcpProvider,
     provider_registry::ProviderRegistry,
-    snowflake_def::SnowflakeProviderDef,
-    tetrate::TetrateProvider,
-    xai::XaiProvider,
-    xai_oauth::XaiOAuthProvider,
 };
 use crate::config::ExtensionConfig;
-use crate::providers::anthropic_def::AnthropicProviderDef;
-use crate::providers::azure_foundry_def::AzureFoundryProviderDef;
 use crate::providers::base::ProviderType;
-use crate::providers::databricks_def::{self, DatabricksProviderDef};
-use crate::providers::databricks_v2_def::{self, DatabricksV2ProviderDef};
-use crate::providers::google_def::GoogleProviderDef;
-use crate::providers::ollama_def::OllamaProviderDef;
-use crate::providers::openai_def::OpenAiProviderDef;
-use crate::providers::openrouter_def::OpenRouterProviderDef;
 use crate::{
-    config::declarative_providers::register_declarative_providers,
     providers::provider_registry::ProviderEntry,
 };
 use anyhow::Result;
@@ -58,85 +22,17 @@ async fn init_registry() -> RwLock<ProviderRegistry> {
     let tls_config =
         crate::config::tls::provider_tls_config_from_config(crate::config::Config::global())
             .expect("failed to load provider TLS config");
-    let mut registry = ProviderRegistry::new(tls_config).with_providers(|registry| {
+    // CodyNo: the agent is locked to the CodyNo gateway. Only the LiteLLM
+    // provider is registered, so no BYOK provider can be selected, configured or
+    // reached — the model catalogue a user sees is exactly what our gateway
+    // serves them for their plan. Upstream registers ~33 providers here; keeping
+    // that list would let anyone bypass our billing by pointing the agent at
+    // their own key.
+    let registry = ProviderRegistry::new(tls_config).with_providers(|registry| {
         use super::inventory::registrations;
 
-        registry.register_with_inventory::<AmpAcpProvider>(
-            false,
-            Some(registrations::amp_acp_inventory()),
-        );
-        registry.register_with_inventory::<AnthropicProviderDef>(
-            true,
-            Some(registrations::anthropic_inventory()),
-        );
-        registry.register::<AvianProvider>(false);
-        registry.register::<AzureProvider>(false);
-        registry.register_with_inventory::<AzureFoundryProviderDef>(
-            true,
-            Some(registrations::azure_foundry_inventory()),
-        );
-        #[cfg(feature = "aws-providers")]
-        registry.register::<BedrockProvider>(false);
-        #[cfg(feature = "local-inference")]
-        registry.register::<LocalInferenceProvider>(false);
-        registry.register_with_inventory::<ChatGptCodexProvider>(
-            true,
-            Some(registrations::chatgpt_codex_inventory()),
-        );
-        registry.register_with_inventory::<ClaudeAcpProvider>(
-            false,
-            Some(registrations::claude_acp_inventory()),
-        );
-        registry.register::<ClaudeCodeProvider>(true);
-        registry.register_with_inventory::<CodexAcpProvider>(
-            false,
-            Some(registrations::codex_acp_inventory()),
-        );
-        registry.register_with_inventory::<CopilotAcpProvider>(
-            false,
-            Some(registrations::copilot_acp_inventory()),
-        );
-        registry.register::<CodexProvider>(true);
-        registry.register_with_inventory::<CursorAgentProvider>(
-            false,
-            Some(registrations::refresh_only()),
-        );
-        registry.register_with_inventory::<DatabricksProviderDef>(
-            true,
-            Some(registrations::refresh_only()),
-        );
-        registry.register_with_inventory::<DatabricksV2ProviderDef>(
-            false,
-            Some(registrations::refresh_only()),
-        );
-        registry.register_with_inventory::<GcpVertexAIProvider>(
-            false,
-            Some(registrations::refresh_only()),
-        );
-        registry.register::<GeminiCliProvider>(false);
-        registry.register_with_inventory::<GeminiOAuthProvider>(
-            false,
-            Some(registrations::gemini_oauth_inventory()),
-        );
-        registry.register_with_inventory::<GithubCopilotProvider>(
-            false,
-            Some(registrations::refresh_only()),
-        );
-        registry.register::<GondolaProvider>(false);
-        registry.register_with_inventory::<GoogleProviderDef>(
-            true,
-            Some(registrations::google_inventory()),
-        );
-        registry.register_with_inventory::<HuggingFaceProvider>(
-            true,
-            Some(registrations::huggingface_inventory()),
-        );
-        registry.register_with_inventory::<KimiCodeProvider>(
-            true,
-            Some(registrations::kimi_code_inventory()),
-        );
         registry.register_with_inventory::<LiteLLMProvider>(
-            false,
+            true,
             Some(registrations::refresh_only().with_configured(|| {
                 let config = crate::config::Config::global();
                 config
@@ -147,82 +43,18 @@ async fn init_registry() -> RwLock<ProviderRegistry> {
                         .is_ok()
             })),
         );
-        registry
-            .register_with_inventory::<NanoGptProvider>(true, Some(registrations::refresh_only()));
-        registry.register_with_inventory::<OllamaProviderDef>(
-            true,
-            Some(registrations::ollama_inventory()),
-        );
-        registry.register_with_inventory::<OpenAiProviderDef>(
-            true,
-            Some(registrations::openai_inventory()),
-        );
-        registry.register_with_inventory::<OpenRouterProviderDef>(
-            true,
-            Some(registrations::refresh_only().with_configured(|| {
-                let config = crate::config::Config::global();
-                config
-                    .get_secret::<serde_json::Value>("OPENROUTER_API_KEY")
-                    .is_ok()
-            })),
-        );
-        registry.register_with_inventory::<PiAcpProvider>(
-            false,
-            Some(registrations::pi_acp_inventory()),
-        );
-        #[cfg(feature = "aws-providers")]
-        registry.register::<SageMakerTgiProvider>(false);
-        registry.register::<SnowflakeProviderDef>(false);
-        registry
-            .register_with_inventory::<TetrateProvider>(true, Some(registrations::refresh_only()));
-        registry.register_with_inventory::<XaiProvider>(false, Some(registrations::refresh_only()));
-        registry.register_with_inventory::<XaiOAuthProvider>(
-            true,
-            Some(registrations::xai_oauth_inventory()),
-        );
     });
-    // Register cleanup functions for providers with cached state
-    registry.set_cleanup(
-        "github_copilot",
-        Arc::new(|| Box::pin(GithubCopilotProvider::cleanup())),
-    );
-    registry.set_cleanup(
-        "databricks",
-        Arc::new(|| Box::pin(databricks_def::cleanup())),
-    );
-    registry.set_cleanup(
-        "databricks_v2",
-        Arc::new(|| Box::pin(databricks_v2_def::cleanup())),
-    );
-    registry.set_cleanup(
-        "kimi_code",
-        Arc::new(|| Box::pin(KimiCodeProvider::cleanup())),
-    );
-    registry.set_cleanup(
-        "chatgpt_codex",
-        Arc::new(|| Box::pin(ChatGptCodexProvider::cleanup())),
-    );
-    registry.set_cleanup(
-        "gemini_oauth",
-        Arc::new(|| Box::pin(GeminiOAuthProvider::cleanup())),
-    );
-    registry.set_cleanup(
-        "xai_oauth",
-        Arc::new(|| Box::pin(XaiOAuthProvider::cleanup())),
-    );
-    registry.set_cleanup(
-        "huggingface",
-        Arc::new(|| Box::pin(HuggingFaceProvider::cleanup())),
-    );
 
-    if let Err(e) = load_custom_providers_into_registry(&mut registry) {
-        tracing::warn!("Failed to load custom providers: {}", e);
-    }
+    // No set_cleanup registrations: every provider that cached credential state
+    // (github_copilot, databricks, kimi_code, chatgpt_codex, gemini_oauth,
+    // xai_oauth, huggingface) is gone.
+    //
+    // load_custom_providers_into_registry() is deliberately not called. It reads
+    // ~/.config/goose/custom_providers/*.json, which would let a user declare an
+    // arbitrary OpenAI-compatible endpoint and re-open exactly the hole the lock
+    // above closes.
+
     RwLock::new(registry)
-}
-
-fn load_custom_providers_into_registry(registry: &mut ProviderRegistry) -> Result<()> {
-    register_declarative_providers(registry)
 }
 
 async fn get_registry() -> &'static RwLock<ProviderRegistry> {
@@ -238,15 +70,9 @@ pub async fn providers() -> Vec<(ProviderMetadata, ProviderType)> {
 }
 
 pub async fn refresh_custom_providers() -> Result<()> {
-    let registry = get_registry().await;
-    registry.write().unwrap().remove_custom_providers();
-
-    if let Err(e) = load_custom_providers_into_registry(&mut registry.write().unwrap()) {
-        tracing::warn!("Failed to refresh custom providers: {}", e);
-        return Err(e);
-    }
-
-    tracing::info!("Custom providers refreshed");
+    // CodyNo: custom providers are disabled. Kept as a no-op so the callers that
+    // poll it (settings UI, config watcher) still compile and simply observe an
+    // unchanged registry.
     Ok(())
 }
 
@@ -412,73 +238,6 @@ mod tests {
                 "OPENAI_API_KEY should be secret"
             );
         }
-    }
-
-    #[tokio::test]
-    async fn test_custom_provider_context_limit_is_applied_from_file() {
-        let _guard = env_lock::lock_env([("GOOSE_PATH_ROOT", None::<&str>)]);
-        let temp_dir = tempfile::tempdir().expect("tempdir should be created");
-        std::env::set_var("GOOSE_PATH_ROOT", temp_dir.path());
-
-        let custom_dir = Paths::config_dir().join("custom_providers");
-        fs::create_dir_all(&custom_dir).expect("custom providers dir should be created");
-
-        let custom_inf = r#"{
-  "name": "custom_inf",
-  "engine": "openai",
-  "display_name": "Custom Inf",
-  "description": "test provider",
-  "api_key_env": "",
-  "base_url": "https://example.invalid/v1/chat/completions",
-  "models": [
-    {"name": "kimi-k2.5", "context_limit": 256000}
-  ],
-  "requires_auth": false
-}"#;
-        fs::write(custom_dir.join("custom_inf.json"), custom_inf)
-            .expect("custom_inf.json should be written");
-
-        let custom_zero = r#"{
-  "name": "custom_zero",
-  "engine": "openai",
-  "display_name": "Custom Zero",
-  "description": "test provider",
-  "api_key_env": "",
-  "base_url": "https://example.invalid/v1/chat/completions",
-  "models": [
-    {"name": "zero-model", "context_limit": 0}
-  ],
-  "requires_auth": false
-}"#;
-        fs::write(custom_dir.join("custom_zero.json"), custom_zero)
-            .expect("custom_zero.json should be written");
-
-        refresh_custom_providers()
-            .await
-            .expect("custom providers should refresh");
-
-        let inf_entry = get_from_registry("custom_inf")
-            .await
-            .expect("custom_inf entry should exist");
-        let provider = inf_entry
-            .create(vec![])
-            .await
-            .expect("custom_inf provider should be created");
-        assert_eq!(provider.get_context_limit("kimi-k2.5", None).await, 256_000);
-
-        let zero_entry = get_from_registry("custom_zero")
-            .await
-            .expect("custom_zero entry should exist");
-        let zero_provider = zero_entry
-            .create(vec![])
-            .await
-            .expect("custom_zero provider should be created");
-        assert_eq!(
-            zero_provider.get_context_limit("zero-model", None).await,
-            goose_providers::model::DEFAULT_CONTEXT_LIMIT
-        );
-
-        std::env::remove_var("GOOSE_PATH_ROOT");
     }
 
     #[tokio::test]
