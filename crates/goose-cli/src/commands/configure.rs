@@ -237,48 +237,13 @@ async fn handle_first_time_setup(config: &Config) -> anyhow::Result<()> {
     println!();
     cliclack::intro(style(" goose-configure ").on_cyan().black())?;
 
-    let setup_method = cliclack::select("How would you like to set up your provider?")
-        .item(
-            "openrouter",
-            "OpenRouter Login (Recommended)",
-            "Sign in with OpenRouter to automatically configure models",
-        )
-        .item(
-            "tetrate",
-            "Tetrate Agent Router Service Login",
-            "Sign in with Tetrate Agent Router Service to automatically configure models",
-        )
-        .item(
-            "manual",
-            "Manual Configuration",
-            "Choose a provider and enter credentials manually",
-        )
-        .interact()?;
-
-    match setup_method {
-        "openrouter" => {
-            if let Err(e) = handle_openrouter_auth().await {
-                let _ = config.clear();
-                println!(
-                    "\n  {} OpenRouter authentication failed: {} \n  Please try again or use manual configuration",
-                    style("Error").red().italic(),
-                    e,
-                );
-            }
-        }
-        "tetrate" => {
-            if let Err(e) = handle_tetrate_auth().await {
-                let _ = config.clear();
-                println!(
-                    "\n  {} Tetrate Agent Router Service authentication failed: {} \n  Please try again or use manual configuration",
-                    style("Error").red().italic(),
-                    e,
-                );
-            }
-        }
-        "manual" => handle_manual_provider_setup(config).await,
-        _ => unreachable!(),
-    }
+    // CodyNo: upstream offers "OpenRouter Login" and "Tetrate Agent Router
+    // Service Login" here, both of which run OAuth against a third party and
+    // write provider credentials directly into config without ever consulting
+    // the provider registry. That walks straight around the gateway lock in
+    // providers::init, so the choice is removed: setup goes through the
+    // registry, which only offers CodyNo.
+    handle_manual_provider_setup(config).await;
     Ok(())
 }
 
