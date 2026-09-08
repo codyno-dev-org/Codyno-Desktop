@@ -369,16 +369,14 @@ async fn handle_existing_config() -> anyhow::Result<()> {
     println!();
 
     cliclack::intro(style(" goose-configure ").on_cyan().black())?;
+    // CodyNo: the "Custom Providers" entry is removed. It let a user register an
+    // arbitrary OpenAI-compatible endpoint, which is the same gateway bypass the
+    // provider registry lock closes.
     let action = cliclack::select("What would you like to configure?")
         .item(
             "providers",
             "Configure Providers",
             "Change provider or update credentials",
-        )
-        .item(
-            "custom_providers",
-            "Custom Providers",
-            "Add custom provider with compatible API",
         )
         .item("add", "Add Extension", "Connect to a new extension")
         .item(
@@ -400,7 +398,6 @@ async fn handle_existing_config() -> anyhow::Result<()> {
         "remove" => remove_extension_dialog(),
         "settings" => configure_settings_dialog().await,
         "providers" => configure_provider_dialog().await.map(|_| ()),
-        "custom_providers" => configure_custom_provider_dialog().await,
         _ => unreachable!(),
     }
 }
