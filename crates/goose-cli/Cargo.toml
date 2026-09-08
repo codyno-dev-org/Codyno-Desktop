@@ -91,11 +91,17 @@ winapi = { workspace = true, features = [
 libc = { version = "0.2.182", default-features = false, features = ["std"] }
 
 [features]
+# CodyNo: "telemetry" is deliberately absent. It gates goose/telemetry, which
+# ships usage data to Block's PostHog project (us.i.posthog.com) under a
+# hardcoded API key, and puts a consent prompt defaulting to Yes in first-run
+# setup. Dropping the feature compiles the collector and the prompt out
+# entirely rather than relying on an opt-out. Note the GOOSE_DISABLE_TELEMETRY
+# env var documented upstream in CUSTOM_DISTROS.md is not read anywhere in the
+# source, so it is not a usable opt-out.
 default = [
     "code-mode",
     "local-inference",
     "aws-providers",
-    "telemetry",
     "nostr",
     "otel",
     "rustls-tls",
