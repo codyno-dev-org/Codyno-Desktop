@@ -98,9 +98,14 @@ libc = { version = "0.2.182", default-features = false, features = ["std"] }
 # entirely rather than relying on an opt-out. Note the GOOSE_DISABLE_TELEMETRY
 # env var documented upstream in CUSTOM_DISTROS.md is not read anywhere in the
 # source, so it is not a usable opt-out.
+# CodyNo: "local-inference" is deliberately absent too. It exposes ACP endpoints
+# for searching and downloading HuggingFace models to run on the user's own
+# machine, which would bypass the gateway entirely. The provider registry lock
+# already makes such models unselectable, so leaving the feature on would only
+# ship a dead capability, its HuggingFace auth path, and the weight of candle,
+# tokenizers, symphonia and rubato.
 default = [
     "code-mode",
-    "local-inference",
     "aws-providers",
     "nostr",
     "otel",
