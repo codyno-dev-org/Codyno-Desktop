@@ -111,7 +111,14 @@ default = [
     "otel",
     "rustls-tls",
     "system-keyring",
-    "update",
+    # CodyNo: "update" is deliberately absent. The self-updater hardcodes
+    # github.com/aaif-goose/goose for both the release download and the Sigstore
+    # attestation lookup, so shipping it would have our users fetch and execute
+    # binaries published by a third party — and the provenance check would pass,
+    # because it verifies their signature. The GITHUB_OWNER / GITHUB_REPO
+    # variables that CUSTOM_DISTROS.md offers for this are not read anywhere in
+    # the Rust source; they only affect desktop packaging (forge.config.ts).
+    # In-product updates come back once they point at our own release feed.
 ]
 roaming = ["dep:goose-roaming", "dep:qrcode", "dep:fs2", "dep:agent-client-protocol"]
 code-mode = ["goose/code-mode"]
