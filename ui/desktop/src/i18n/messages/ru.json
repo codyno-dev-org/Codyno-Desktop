@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "Год"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "Добавить"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Совместимо с Anthropic"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "Базовый путь API (необязательно)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "Переопределите путь API по умолчанию. Оставьте пустым, чтобы использовать путь провайдера по умолчанию."
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "например, v1/chat/completions или project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "API-ключ"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "Оставьте пустым, чтобы сохранить существующий ключ"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "Ваш API-ключ"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "Требуется API-ключ"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "URL API"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "Требуется URL API"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "Вложения"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "Локальные LLM, такие как Ollama, обычно не требуют API-ключа."
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "Аутентификация"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "Доступные модели (через запятую)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← Назад"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "Отмена"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "Нельзя удалить этого провайдера, пока он используется. Сначала переключитесь на другую модель."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "Выберите способ настройки провайдера."
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "Очистить"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "Настроить вручную"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "Введите все данные провайдера самостоятельно"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "Подтвердить удаление"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "Создать провайдера"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "Пользовательские заголовки"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "Добавьте пользовательские HTTP-заголовки для запросов к провайдеру. После заполнения обоих полей нажмите кнопку «+», чтобы добавить."
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "Удалить этого пользовательского провайдера? Провайдер и сохраненный API-ключ будут удалены навсегда. Это действие нельзя отменить."
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "Удалить провайдера"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "Отображаемое имя"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "Имя вашего провайдера"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "Требуется отображаемое имя"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "Документация"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "Необходимо ввести имя и заголовок"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "Заголовок с таким именем уже существует"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "Имя заголовка"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "Имя заголовка не может содержать пробелы"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "Требуется хотя бы одна модель"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Совместимо с Ollama"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "Совместимо с OpenAI"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "Тип провайдера"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "Рассуждение"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "Этот провайдер требует API-ключ"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "Начать с шаблона провайдера"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "Выберите известного провайдера, и мы автоматически заполним конфигурацию"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "Не удалось сохранить провайдера. Проверьте конфигурацию и повторите попытку."
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "Провайдер поддерживает потоковые ответы"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "Вызов инструментов"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "Обновить провайдера"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "Используется шаблон: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "Значение"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "Настроить параметры {name}"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "Вход..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "Добавить провайдера"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "Добавить провайдера"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "Выбрать модель"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "Настроить провайдера"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "Изменить провайдера"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "Из шаблона или вручную"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "Нет провайдеров, соответствующих \"{query}\""
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "Логотип {providerName}"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "Добавить пользовательского провайдера"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "Добавить пользовательского провайдера"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "Подключиться к провайдеру"

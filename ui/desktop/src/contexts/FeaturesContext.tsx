@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useState, useMemo } from 'react';
-import { getAcpFeatureCapabilities } from '../acp/capabilities';
+import { createContext, useContext, useMemo } from 'react';
 
 interface FeaturesContextValue {
   localInference: boolean;
@@ -9,28 +8,14 @@ interface FeaturesContextValue {
 const FeaturesContext = createContext<FeaturesContextValue | null>(null);
 
 export function FeaturesProvider({ children }: { children: React.ReactNode }) {
-  const [localInference, setLocalInference] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const capabilities = await getAcpFeatureCapabilities();
-        setLocalInference(capabilities.localInference);
-      } catch (error) {
-        console.warn('[FeaturesContext] Failed to fetch features:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, []);
-
   const value = useMemo<FeaturesContextValue>(
     () => ({
-      localInference,
-      isLoading,
+      // CodyNo routes all inference through LiteLLM. Local models are not a
+      // supported product path even if a binary was built with that feature.
+      localInference: false,
+      isLoading: false,
     }),
-    [localInference, isLoading]
+    []
   );
 
   return <FeaturesContext.Provider value={value}>{children}</FeaturesContext.Provider>;

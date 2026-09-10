@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "Année"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "Ajouter"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Compatible Anthropic"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "Chemin de base de l'API (optionnel)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "Remplace le chemin d'API par défaut. Laissez vide pour utiliser le chemin par défaut du fournisseur."
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "p. ex., v1/chat/completions ou project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "Clé API"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "Laissez vide pour conserver la clé existante"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "Votre clé API"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "La clé API est obligatoire"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "URL de l'API"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "L'URL de l'API est obligatoire"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "Pièces jointes"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "Les LLM locaux comme Ollama ne nécessitent généralement pas de clé API."
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "Authentification"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "Modèles disponibles (séparés par des virgules)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← Retour"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "Annuler"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "Vous ne pouvez pas supprimer ce fournisseur tant qu'il est en cours d'utilisation. Veuillez d'abord passer à un autre modèle."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "Choisissez comment vous souhaitez configurer votre fournisseur."
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "Effacer"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "Configurer manuellement"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "Saisissez vous-même tous les détails du fournisseur"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "Confirmer la suppression"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "Créer un fournisseur"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "En-têtes personnalisés"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "Ajoutez des en-têtes HTTP personnalisés à inclure dans les requêtes vers le fournisseur. Cliquez sur le bouton « + » pour les ajouter après avoir rempli les deux champs."
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "Êtes-vous sûr de vouloir supprimer ce fournisseur personnalisé ? Cela supprimera définitivement le fournisseur et sa clé API stockée. Cette action est irréversible."
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "Supprimer le fournisseur"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "Nom d'affichage"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "Nom de votre fournisseur"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "Le nom d'affichage est obligatoire"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "Documentation"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "Le nom et la valeur de l'en-tête doivent tous deux être saisis"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "Un en-tête portant ce nom existe déjà"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "Nom de l'en-tête"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "Le nom de l'en-tête ne peut pas contenir d'espaces"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "Au moins un modèle est requis"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Compatible Ollama"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "Compatible OpenAI"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "Type de fournisseur"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "Raisonnement"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "Ce fournisseur nécessite une clé API"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "Partir d'un modèle de fournisseur"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "Choisissez un fournisseur connu et nous remplirons automatiquement la configuration"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "Échec de l'enregistrement du fournisseur. Veuillez vérifier votre configuration et réessayer."
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "Le fournisseur prend en charge les réponses en streaming"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "Appel d'outils"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "Mettre à jour le fournisseur"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "Modèle utilisé : {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "Valeur"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "Configurer les paramètres de {name}"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "Connexion en cours..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "Ajouter un fournisseur"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "Ajouter un fournisseur"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "Choisir un modèle"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "Configurer le fournisseur"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "Modifier le fournisseur"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "À partir d'un modèle ou d'une configuration manuelle"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "Aucun fournisseur ne correspond à \"{query}\""
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "Logo {providerName}"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "Ajouter un fournisseur personnalisé"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "Ajouter un fournisseur personnalisé"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "Se connecter à un fournisseur"

@@ -132,7 +132,10 @@ nostr = ["goose/nostr"]
 otel = ["goose/otel"]
 system-keyring = ["goose/system-keyring"]
 update = ["dep:sigstore-verify", "dep:snap"]
-portable-default = ["rustls-tls", "aws-providers", "telemetry", "otel"]
+# CodyNo: keep the portable release bundle telemetry-free as well as the normal
+# default build. This is the feature set used by the documented musl/Termux
+# build path.
+portable-default = ["rustls-tls", "aws-providers", "otel"]
 # disables the update command
 disable-update = []
 rustls-tls = [

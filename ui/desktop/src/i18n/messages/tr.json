@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "Yıl"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "Ekle"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Anthropic Uyumlu"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "API Temel Yol (isteğe bağlı)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "Varsayılan API yolunu geçersiz kılın. Sağlayıcının varsayılan yolunu kullanmak için boş bırakın."
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "ör. v1/sohbet/tamamlamalar veya proje_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "API Anahtarı"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "Mevcut anahtarı korumak için boş bırakın"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "API anahtarınız"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "API anahtarı gerekli"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "API URL'si"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "API URL'si gerekli"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "Ekler"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "Ollama gibi yerel LLM'ler genellikle API anahtarı gerektirmez."
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "Kimlik doğrulama"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "Mevcut Modeller (virgülle ayrılmış)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← Geri"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "İptal"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "Bu sağlayıcıyı şu anda kullanımdayken silemezsiniz. Lütfen önce farklı bir modele geçin."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "Sağlayıcınızı nasıl ayarlamak istediğinizi seçin."
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "Temizle"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "Manuel olarak yapılandır"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "Tüm sağlayıcı ayrıntılarını kendiniz girin"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "Silmeyi Onayla"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "Sağlayıcı Oluştur"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "Özel Başlıklar"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "Sağlayıcıya gönderilen isteklere dahil etmek için özel HTTP üstbilgileri ekleyin. Her iki alanı da doldurduktan sonra eklemek için \"+\" butonuna tıklayın."
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "Bu özel sağlayıcıyı silmek istediğinizden emin misiniz? Bu, sağlayıcıyı ve depolanan API anahtarını kalıcı olarak kaldıracaktır. Bu eylem geri alınamaz."
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "Sağlayıcıyı Sil"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "Görünen Ad"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "Sağlayıcı Adınız"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "Görünen ad gerekli"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "Dokümanlar"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "Hem başlık adı hem de değer girilmelidir"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "Bu ada sahip bir başlık zaten mevcut"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "Başlık adı"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "Başlık adı boşluk içeremez"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "En az bir model gerekli"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Ollama Uyumlu"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "OpenAI Uyumlu"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "Sağlayıcı Türü"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "muhakeme"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "Bu sağlayıcı bir API anahtarı gerektiriyor"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "Sağlayıcı şablonundan başlayın"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "Bilinen bir sağlayıcı seçin, yapılandırmayı otomatik olarak dolduralım"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "Sağlayıcı kaydedilemedi. Lütfen yapılandırmanızı kontrol edip tekrar deneyin."
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "Sağlayıcı akış yanıtlarını destekler"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "Takım çağırma"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "Sağlayıcıyı Güncelle"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "Şablonu kullanma: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "Değer"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "{name} ayarlarını yapılandırın"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "Oturum açılıyor..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "Sağlayıcı Ekle"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "Sağlayıcı Ekle"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "Modeli Seçin"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "Sağlayıcıyı Yapılandır"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "Sağlayıcıyı Düzenle"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "Şablondan veya manuel kurulumdan"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "\"{query}\" ile eşleşen sağlayıcı yok"
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "{providerName} logosu"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "Özel bir sağlayıcı ekleyin"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "Özel Sağlayıcı Ekle"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "Bir Sağlayıcıya Bağlan"

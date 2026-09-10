@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "年"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "添加"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Anthropic 兼容"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "API 基础路径（可选）"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "覆盖默认 API 路径。留空将使用提供商默认路径。"
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "例如：v1/chat/completions 或 project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "API 密钥"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "留空将保留现有密钥"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "你的 API 密钥"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "API 密钥为必填项"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "API 地址"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "API 地址为必填项"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "附件"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "像 Ollama 这样的本地大模型通常不需要 API 密钥。"
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "认证"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "可用模型（用逗号分隔）"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← 返回"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "取消"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "此提供商正在使用中，无法删除。请先切换到其他模型。"
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "选择你想如何设置提供商。"
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "清空"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "手动配置"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "自己输入所有提供商详情"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "确认删除"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "创建提供商"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "自定义请求头"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "添加请求提供商时附带的自定义 HTTP 请求头。填完两个字段后点击“+”按钮添加。"
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "确定要删除此自定义提供商吗？这会永久移除提供商及其保存的 API 密钥，此操作无法撤销。"
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "删除提供商"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "显示名称"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "你的提供商名称"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "显示名称为必填项"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "文档"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "请求头的名称和值都必须填写"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "已存在同名的请求头"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "请求头名称"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "请求头名称不能包含空格"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "至少需要一个模型"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Ollama 兼容"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "OpenAI 兼容"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "提供商类型"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "推理"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "此提供商需要 API 密钥"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "从提供商模板开始"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "选择一个已知的提供商，我们会为你自动填充配置"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "保存提供商失败。请检查配置后重试。"
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "提供商支持流式响应"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "工具调用"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "更新提供商"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "正在使用模板：{name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "值"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "配置 {name} 设置"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "登录中…"
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "添加提供商"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "添加提供商"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "选择模型"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "配置提供商"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "编辑提供商"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "使用模板或手动设置"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "没有匹配 \"{query}\" 的提供商"
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "{providerName} 徽标"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "添加自定义提供商"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "添加自定义提供商"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "连接提供商"

@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "Năm"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "Thêm"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Tương thích Anthropic"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "Đường dẫn API cơ sở (tùy chọn)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "Ghi đè đường dẫn API mặc định. Để trống để sử dụng đường dẫn mặc định của nhà cung cấp."
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "ví dụ: v1/chat/completions hoặc project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "Khóa API"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "Để trống để giữ khóa hiện tại"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "Khóa API của bạn"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "Khóa API là bắt buộc"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "URL API"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "URL API là bắt buộc"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "Tệp đính kèm"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "Các LLM cục bộ như Ollama thường không yêu cầu khóa API."
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "Xác thực"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "Các mô hình khả dụng (phân tách bằng dấu phẩy)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← Quay lại"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "Hủy"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "Bạn không thể xóa nhà cung cấp này khi nó đang được sử dụng. Vui lòng chuyển sang mô hình khác trước."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "Chọn cách bạn muốn thiết lập nhà cung cấp của mình."
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "Xóa"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "Cấu hình thủ công"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "Tự nhập tất cả thông tin chi tiết của nhà cung cấp"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "Xác nhận xóa"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "Tạo nhà cung cấp"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "Tiêu đề tùy chỉnh"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "Thêm các tiêu đề HTTP tùy chỉnh để đưa vào các yêu cầu gửi đến nhà cung cấp. Nhấp vào nút \"+\" để thêm sau khi điền cả hai trường."
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "Bạn có chắc chắn muốn xóa nhà cung cấp tùy chỉnh này không? Thao tác này sẽ xóa vĩnh viễn nhà cung cấp và khóa API đã lưu trữ của nó. Hành động này không thể hoàn tác."
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "Xóa nhà cung cấp"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "Tên hiển thị"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "Tên nhà cung cấp của bạn"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "Tên hiển thị là bắt buộc"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "Tài liệu"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "Phải nhập cả tên và giá trị tiêu đề"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "Đã tồn tại một tiêu đề có tên này"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "Tên tiêu đề"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "Tên tiêu đề không được chứa khoảng trắng"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "Cần có ít nhất một mô hình"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Tương thích Ollama"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "Tương thích OpenAI"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "Loại nhà cung cấp"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "Suy luận"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "Nhà cung cấp này yêu cầu khóa API"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "Bắt đầu từ mẫu nhà cung cấp"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "Chọn một nhà cung cấp đã biết và chúng tôi sẽ tự động điền cấu hình"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "Không thể lưu nhà cung cấp. Vui lòng kiểm tra cấu hình của bạn và thử lại."
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "Nhà cung cấp hỗ trợ phản hồi theo luồng (streaming)"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "Gọi công cụ"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "Cập nhật nhà cung cấp"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "Đang dùng mẫu: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "Giá trị"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "Cấu hình thiết lập {name}"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "Đang đăng nhập..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "Thêm nhà cung cấp"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "Thêm nhà cung cấp"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "Chọn mô hình"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "Cấu hình nhà cung cấp"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "Chỉnh sửa nhà cung cấp"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "Từ mẫu hoặc thiết lập thủ công"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "Không có nhà cung cấp nào khớp với \"{query}\""
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "Logo {providerName}"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "Thêm nhà cung cấp tùy chỉnh"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "Thêm nhà cung cấp tùy chỉnh"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "Kết nối với nhà cung cấp"

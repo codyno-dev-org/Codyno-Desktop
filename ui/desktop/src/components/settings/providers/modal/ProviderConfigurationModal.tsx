@@ -16,7 +16,6 @@ import { SecureStorageNotice } from './subcomponents/SecureStorageNotice';
 import { providerConfigSubmitHandler } from './subcomponents/handlers/DefaultSubmitHandler';
 import {
   acpAuthenticateProvider,
-  acpDeleteCustomProvider,
   acpDeleteProviderConfig,
   acpSaveProviderConfig,
 } from '../../../../acp/providers';
@@ -331,15 +330,9 @@ export default function ProviderConfigurationModal({
       return;
     }
 
-    const isCustomProvider = provider.provider_type === 'Custom';
-
-    if (isCustomProvider) {
-      await acpDeleteCustomProvider(provider.name);
-    } else {
-      // Deletes all config/secret fields and cleans up provider-specific cache
-      // (e.g. OAuth tokens) server-side.
-      await acpDeleteProviderConfig(provider.name);
-    }
+    // Deletes all config/secret fields and cleans up provider-specific cache
+    // (e.g. OAuth tokens) server-side.
+    await acpDeleteProviderConfig(provider.name);
 
     onClose();
   };

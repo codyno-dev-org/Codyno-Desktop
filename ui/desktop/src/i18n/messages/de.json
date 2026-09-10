@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "Jahr"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "Hinzufügen"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Anthropic-kompatibel"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "API-Basispfad (optional)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "Überschreiben Sie den Standard-API-Pfad. Leer lassen, um den Standardpfad des Anbieters zu verwenden."
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "z. B. v1/chat/completions oder project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "API-Schlüssel"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "Leer lassen, um den vorhandenen Schlüssel beizubehalten"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "Ihr API-Schlüssel"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "API-Schlüssel ist erforderlich"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "API-URL"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "API-URL ist erforderlich"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "Anhänge"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "Lokale LLMs wie Ollama benötigen normalerweise keinen API-Schlüssel."
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "Authentifizierung"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "Verfügbare Modelle (durch Kommas getrennt)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← Zurück"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "Abbrechen"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "Sie können diesen Anbieter nicht löschen, während er gerade verwendet wird. Bitte wechseln Sie zuerst zu einem anderen Modell."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "Wählen Sie, wie Sie Ihren Anbieter einrichten möchten."
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "Löschen"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "Manuell konfigurieren"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "Geben Sie alle Anbieterdetails selbst ein"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "Löschen bestätigen"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "Anbieter erstellen"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "Benutzerdefinierte Header"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "Fügen Sie benutzerdefinierte HTTP-Header hinzu, die in Anfragen an den Anbieter aufgenommen werden. Klicken Sie auf die Schaltfläche \"+\", um sie hinzuzufügen, nachdem Sie beide Felder ausgefüllt haben."
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "Möchten Sie diesen benutzerdefinierten Anbieter wirklich löschen? Dadurch werden der Anbieter und sein gespeicherter API-Schlüssel dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden."
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "Anbieter löschen"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "Anzeigename"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "Ihr Anbietername"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "Anzeigename ist erforderlich"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "Dokumentation"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "Sowohl Header-Name als auch -Wert müssen eingegeben werden"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "Ein Header mit diesem Namen existiert bereits"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "Header-Name"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "Der Header-Name darf keine Leerzeichen enthalten"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "modell-a, modell-b, modell-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "Mindestens ein Modell ist erforderlich"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Ollama-kompatibel"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "OpenAI-kompatibel"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "Anbietertyp"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "Schlussfolgern"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "Dieser Anbieter erfordert einen API-Schlüssel"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "Mit einer Anbietervorlage beginnen"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "Wählen Sie einen bekannten Anbieter aus, und wir füllen die Konfiguration automatisch aus"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "Anbieter konnte nicht gespeichert werden. Bitte überprüfen Sie Ihre Konfiguration und versuchen Sie es erneut."
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "Anbieter unterstützt Streaming-Antworten"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "Tool-Aufrufe"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "Anbieter aktualisieren"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "Verwendete Vorlage: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "Wert"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "{name}-Einstellungen konfigurieren"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "Anmeldung läuft..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "Anbieter hinzufügen"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "Anbieter hinzufügen"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "Modell auswählen"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "Anbieter konfigurieren"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "Anbieter bearbeiten"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "Aus Vorlage oder manuelle Einrichtung"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "Keine Anbieter entsprechen \"{query}\""
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "{providerName}-Logo"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "Benutzerdefinierten Anbieter hinzufügen"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "Benutzerdefinierten Anbieter hinzufügen"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "Mit einem Anbieter verbinden"

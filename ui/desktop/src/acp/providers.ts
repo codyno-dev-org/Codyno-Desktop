@@ -1,7 +1,5 @@
 import type {
   CanonicalModelInfoDto,
-  CustomProviderCreateRequest_unstable,
-  CustomProviderReadResponse_unstable,
   ProviderSecretDto,
   ProviderInventoryEntryDto,
   RefreshProviderInventoryResponse_unstable,
@@ -12,7 +10,6 @@ import { methods } from '@agentclientprotocol/sdk';
 import type {
   ProviderDetails,
   ThinkingEffort,
-  UpdateCustomProviderRequest,
 } from '../types/providers';
 import { getAcpClient } from './acpConnection';
 
@@ -77,28 +74,15 @@ function providerEntryToDetails(entry: ProviderInventoryEntryDto): ProviderDetai
   };
 }
 
-function updateRequestToCreate(
-  request: UpdateCustomProviderRequest
-): CustomProviderCreateRequest_unstable {
-  return {
-    engine: request.engine,
-    displayName: request.display_name,
-    apiUrl: request.api_url,
-    apiKey: request.api_key || null,
-    models: request.models,
-    supportsStreaming: request.supports_streaming ?? null,
-    headers: request.headers ?? undefined,
-    requiresAuth: request.requires_auth ?? true,
-    catalogProviderId: request.catalog_provider_id ?? null,
-    basePath: request.base_path ?? null,
-    preservesThinking: request.preserves_thinking ?? null,
-  };
-}
-
 export async function acpListProviderDetails(): Promise<ProviderDetails[]> {
   const client = await getAcpClient();
   const { entries } = await client.goose.providersList_unstable({});
-  return entries.map(providerEntryToDetails);
+  // The CodyNo fork does not support user-defined providers. Keep the UI
+  // defensive in case an old persisted custom provider or a future backend
+  // response still contains one.
+  return entries
+    .map(providerEntryToDetails)
+    .filter((provider) => provider.provider_type !== 'Custom');
 }
 
 export async function acpListSetupProviderDetails(): Promise<ProviderDetails[]> {
@@ -215,39 +199,6 @@ export async function acpGetProviderTemplate(providerId: string): Promise<Provid
   const client = await getAcpClient();
   const { template } = await client.goose.providersCatalogTemplate_unstable({ providerId });
   return template;
-}
-
-export async function acpGetCustomProvider(
-  providerId: string
-): Promise<CustomProviderReadResponse_unstable> {
-  const client = await getAcpClient();
-  return client.goose.providersCustomRead_unstable({ providerId });
-}
-
-export async function acpCreateCustomProviderFromRequest(
-  request: UpdateCustomProviderRequest
-): Promise<{ provider_name: string }> {
-  const client = await getAcpClient();
-  const response = await client.goose.providersCustomCreate_unstable(
-    updateRequestToCreate(request)
-  );
-  return { provider_name: response.providerId };
-}
-
-export async function acpUpdateCustomProviderFromRequest(
-  providerId: string,
-  request: UpdateCustomProviderRequest
-): Promise<void> {
-  const client = await getAcpClient();
-  await client.goose.providersCustomUpdate_unstable({
-    providerId,
-    ...updateRequestToCreate(request),
-  });
-}
-
-export async function acpDeleteCustomProvider(providerId: string): Promise<void> {
-  const client = await getAcpClient();
-  await client.goose.providersCustomDelete_unstable({ providerId });
 }
 
 export async function acpReadProviderConfig(providerId: string) {

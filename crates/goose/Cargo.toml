@@ -77,7 +77,8 @@ native-tls = [
     "goose-providers/native-tls",
 ]
 system-keyring = ["dep:keyring"]
-portable-default = ["rustls-tls", "aws-providers", "telemetry", "otel"]
+# CodyNo: the portable bundle must not re-enable Block's telemetry collector.
+portable-default = ["rustls-tls", "aws-providers", "otel"]
 nostr = ["dep:nostr", "dep:nostr-sdk"]
 
 [lints]

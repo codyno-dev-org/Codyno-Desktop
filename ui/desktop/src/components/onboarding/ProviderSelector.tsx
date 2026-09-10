@@ -1,15 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
-import {
-  acpCreateCustomProviderFromRequest,
-  acpListSetupProviderDetails,
-} from '../../acp/providers';
-import type { ProviderDetails, UpdateCustomProviderRequest } from '../../types/providers';
+import { acpListSetupProviderDetails } from '../../acp/providers';
+import type { ProviderDetails } from '../../types/providers';
 import { Select } from '../ui/Select';
 import ProviderConfigForm from './ProviderConfigForm';
 import LocalModelPicker from './LocalModelPicker';
-import CustomProviderForm from '../settings/providers/modal/subcomponents/forms/CustomProviderForm';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
-import { HardDrive, Key, Plus } from 'lucide-react';
+import { HardDrive, Key } from 'lucide-react';
 import { defineMessages, useIntl } from '../../i18n';
 import { useFeatures } from '../../contexts/FeaturesContext';
 
@@ -33,14 +28,6 @@ const i18n = defineMessages({
   selectProvider: {
     id: 'providerSelector.selectProvider',
     defaultMessage: 'Select a provider',
-  },
-  addCustomProvider: {
-    id: 'providerSelector.addCustomProvider',
-    defaultMessage: 'Add a custom provider',
-  },
-  addCustomProviderTitle: {
-    id: 'providerSelector.addCustomProviderTitle',
-    defaultMessage: 'Add Custom Provider',
   },
 });
 
@@ -69,7 +56,6 @@ export default function ProviderSelector({
   const [providerList, setProviderList] = useState<ProviderDetails[]>([]);
   const [selectedOption, setSelectedOption] = useState<ProviderOption | null>(null);
   const [selectedPath, setSelectedPath] = useState<SelectedPath>(null);
-  const [showCustomModal, setShowCustomModal] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -119,14 +105,6 @@ export default function ProviderSelector({
   const handleProviderSelect = (option: ProviderOption | null) => {
     setSelectedOption(option);
     if (option) onFirstSelection?.();
-  };
-
-  const handleCreateCustomProvider = async (data: UpdateCustomProviderRequest) => {
-    const result = await acpCreateCustomProviderFromRequest(data);
-    setShowCustomModal(false);
-    if (result.provider_name) {
-      await onConfigured(result.provider_name);
-    }
   };
 
   const selectedProvider = selectedOption?.provider ?? null;
@@ -192,14 +170,6 @@ export default function ProviderSelector({
             />
           </div>
 
-          <button
-            onClick={() => setShowCustomModal(true)}
-            className="flex items-center gap-1 text-sm text-text-muted hover:text-text-default transition-colors mb-6"
-          >
-            <Plus size={14} />
-            <span>{intl.formatMessage(i18n.addCustomProvider)}</span>
-          </button>
-
           {selectedProvider && (
             <ProviderConfigForm
               key={selectedProvider.name}
@@ -210,19 +180,6 @@ export default function ProviderSelector({
         </div>
       )}
 
-      <Dialog open={showCustomModal} onOpenChange={setShowCustomModal}>
-        <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>{intl.formatMessage(i18n.addCustomProviderTitle)}</DialogTitle>
-          </DialogHeader>
-          <CustomProviderForm
-            initialData={null}
-            isEditable={true}
-            onSubmit={handleCreateCustomProvider}
-            onCancel={() => setShowCustomModal(false)}
-          />
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

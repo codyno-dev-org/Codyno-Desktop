@@ -17,7 +17,6 @@ vi.mock('../../../ModelAndProviderContext', () => ({
 
 vi.mock('../../../../acp/providers', () => ({
   acpAuthenticateProvider: vi.fn(),
-  acpDeleteCustomProvider: vi.fn(),
   acpDeleteProviderConfig: vi.fn(),
   acpEnableProvider: vi.fn(),
   acpRefreshProviderDetails: vi.fn(),

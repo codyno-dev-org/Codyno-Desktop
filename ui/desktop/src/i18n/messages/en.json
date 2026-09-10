@@ -635,162 +635,6 @@
   "cronPicker.year": {
     "defaultMessage": "Year"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "Add"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Anthropic Compatible"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "API Base Path (optional)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "Override the default API path. Leave blank to use the provider's default path."
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "e.g., v1/chat/completions or project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "API Key"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "Leave blank to keep existing key"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "Your API key"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "API key is required"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "API URL"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "API URL is required"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "Attachments"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "Local LLMs like Ollama typically don't require an API key."
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "Authentication"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "Available Models (comma-separated)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← Back"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "Cancel"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "You cannot delete this provider while it's currently in use. Please switch to a different model first."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "Choose how you'd like to set up your provider."
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "Clear"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "Configure manually"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "Enter all provider details yourself"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "Confirm Delete"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "Create Provider"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "Custom Headers"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "Add custom HTTP headers to include in requests to the provider. Click the \"+\" button to add after filling both fields."
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "Are you sure you want to delete this custom provider? This will permanently remove the provider and its stored API key. This action cannot be undone."
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "Delete Provider"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "Display Name"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "Your Provider Name"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "Display name is required"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "Docs"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "Both header name and value must be entered"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "A header with this name already exists"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "Header name"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "Header name cannot contain spaces"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "At least one model is required"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Ollama Compatible"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "OpenAI Compatible"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "Provider Type"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "Reasoning"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "This provider requires an API key"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "Start from a provider template"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "Pick a known provider and we'll auto-fill the configuration"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "Failed to save provider. Please check your configuration and try again."
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "Provider supports streaming responses"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "Tool calling"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "Update Provider"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "Using template: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "Value"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "Configure {name} settings"
   },
@@ -2861,23 +2705,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "Signing in..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "Add Provider"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "Add Provider"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "Choose Model"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "Configure Provider"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "Edit Provider"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "From template or manual setup"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "No providers match \"{query}\""
@@ -2887,12 +2716,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "{providerName} logo"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "Add a custom provider"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "Add Custom Provider"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "Connect to a Provider"

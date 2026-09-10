@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "वर्ष"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "जोड़ें"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Anthropic संगत"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "API बेस पथ (वैकल्पिक)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "डिफ़ॉल्ट API पथ को ओवरराइड करें। प्रदाता के डिफ़ॉल्ट पथ का उपयोग करने के लिए खाली छोड़ दें।"
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "उदाहरण के लिए, v1/चैट/समापन या project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "API कुंजी"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "मौजूदा कुंजी रखने के लिए खाली छोड़ दें"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "आपकी API कुंजी"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "API कुंजी आवश्यक है"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "API URL"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "API URL आवश्यक है"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "अनुलग्नक"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "Ollama जैसे स्थानीय एलएलएम को आमतौर पर API कुंजी की आवश्यकता नहीं होती है।"
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "प्रमाणीकरण"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "उपलब्ध मॉडल (अल्पविराम से अलग)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← वापस"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "रद्द करें"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "आप इस प्रदाता को तब तक नहीं हटा सकते जब तक यह वर्तमान में उपयोग में है। कृपया पहले किसी भिन्न मॉडल पर स्विच करें."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "चुनें कि आप अपने प्रदाता को कैसे स्थापित करना चाहेंगे।"
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "स्पष्ट"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "मैन्युअल रूप से कॉन्फ़िगर करें"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "सभी प्रदाता विवरण स्वयं दर्ज करें"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "हटाने की पुष्टि करें"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "प्रदाता बनाएँ"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "कस्टम हेडर"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "प्रदाता के अनुरोधों में शामिल करने के लिए कस्टम HTTP हेडर जोड़ें। दोनों फ़ील्ड भरने के बाद जोड़ने के लिए \"+\" बटन पर क्लिक करें।"
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "क्या आप वाकई इस कस्टम प्रदाता को हटाना चाहते हैं? इससे प्रदाता और उसकी संग्रहीत API कुंजी स्थायी रूप से हट जाएगी। इस कार्रवाई को वापस नहीं किया जा सकता।"
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "प्रदाता हटाएँ"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "प्रदर्शन नाम"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "आपके प्रदाता का नाम"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "प्रदर्शन नाम आवश्यक है"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "दस्तावेज़"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "हेडर नाम और मान दोनों दर्ज किए जाने चाहिए"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "इस नाम का एक हेडर पहले से मौजूद है"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "शीर्षलेख नाम"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "हेडर नाम में रिक्त स्थान नहीं हो सकते"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "मॉडल-ए, मॉडल-बी, मॉडल-सी"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "कम से कम एक मॉडल आवश्यक है"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Ollama संगत"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "OpenAI संगत"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "प्रदाता प्रकार"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "तर्क"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "इस प्रदाता को API कुंजी की आवश्यकता है"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "प्रदाता टेम्पलेट से प्रारंभ करें"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "एक ज्ञात प्रदाता चुनें और हम कॉन्फ़िगरेशन को स्वतः भर देंगे"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "प्रदाता को सहेजने में विफल. कृपया अपना कॉन्फ़िगरेशन जांचें और पुनः प्रयास करें।"
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "प्रदाता स्ट्रीमिंग प्रतिक्रियाओं का समर्थन करता है"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "टूल कॉलिंग"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "अद्यतन प्रदाता"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "टेम्पलेट का उपयोग करना: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "मूल्य"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "{name} सेटिंग्स कॉन्फ़िगर करें"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "साइन इन किया जा रहा है..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "प्रदाता जोड़ें"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "प्रदाता जोड़ें"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "मॉडल चुनें"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "प्रदाता को कॉन्फ़िगर करें"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "प्रदाता संपादित करें"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "टेम्प्लेट या मैन्युअल सेटअप से"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "\"{query}\" से मेल खाने वाला कोई प्रदाता नहीं"
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "{providerName} लोगो"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "एक कस्टम प्रदाता जोड़ें"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "कस्टम प्रदाता जोड़ें"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "किसी प्रदाता से कनेक्ट करें"

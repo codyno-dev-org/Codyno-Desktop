@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "年"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "追加"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Anthropic互換"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "APIベースパス（任意）"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "デフォルトのAPIパスを上書きします。プロバイダーのデフォルトパスを使う場合は空欄にしてください。"
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "例: v1/chat/completions または project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "APIキー"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "既存のキーを保持する場合は空欄"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "あなたのAPIキー"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "APIキーは必須です"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "API URL"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "API URLは必須です"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "添付ファイル"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "OllamaのようなローカルLLMは通常APIキーを必要としません。"
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "認証"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "利用可能なモデル（カンマ区切り）"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← 戻る"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "キャンセル"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "このプロバイダーは現在使用中のため削除できません。先に別のモデルに切り替えてください。"
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "プロバイダーの設定方法を選択してください。"
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "クリア"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "手動で設定"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "プロバイダーの詳細を自分で入力します"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "削除の確認"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "プロバイダーを作成"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "カスタムヘッダー"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "プロバイダーへのリクエストに含めるカスタムHTTPヘッダーを追加します。両方のフィールドを入力後、「+」ボタンをクリックして追加してください。"
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "このカスタムプロバイダーを削除してもよろしいですか？プロバイダーと保存されたAPIキーが完全に削除されます。この操作は元に戻せません。"
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "プロバイダーを削除"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "表示名"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "プロバイダー名"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "表示名は必須です"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "ドキュメント"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "ヘッダー名と値の両方を入力してください"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "この名前のヘッダーはすでに存在します"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "ヘッダー名"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "ヘッダー名にスペースは使用できません"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "少なくとも1つのモデルが必要です"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Ollama互換"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "OpenAI互換"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "プロバイダー種別"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "推論"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "このプロバイダーにはAPIキーが必要です"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "プロバイダーテンプレートから始める"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "既知のプロバイダーを選択すると、設定が自動入力されます"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "プロバイダーの保存に失敗しました。設定を確認してもう一度お試しください。"
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "プロバイダーはストリーミング応答に対応しています"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "ツール呼び出し"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "プロバイダーを更新"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "テンプレートを使用中: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "値"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "{name}の設定を構成"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "サインイン中..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "プロバイダーを追加"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "プロバイダーを追加"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "モデルを選択"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "プロバイダーを設定"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "プロバイダーを編集"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "テンプレートまたは手動設定から"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "「{query}」に一致するプロバイダーはありません"
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "{providerName}のロゴ"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "カスタムプロバイダーを追加"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "カスタムプロバイダーを追加"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "プロバイダーに接続"

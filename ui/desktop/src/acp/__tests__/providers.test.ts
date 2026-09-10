@@ -184,7 +184,8 @@ describe('ACP providers', () => {
 
     const providers = await acpListProviderDetails();
 
-    expect(providers.map((provider) => provider.uses_acp)).toEqual([false, false, true]);
+    expect(providers.map((provider) => provider.name)).toEqual(['cursor-agent', 'pi-acp']);
+    expect(providers.map((provider) => provider.uses_acp)).toEqual([false, true]);
   });
 
   it('probes an installed ACP adapter and returns its refreshed models', async () => {

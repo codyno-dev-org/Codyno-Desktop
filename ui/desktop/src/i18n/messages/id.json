@@ -614,162 +614,6 @@
   "cronPicker.year": {
     "defaultMessage": "Tahun"
   },
-  "customProviderForm.add": {
-    "defaultMessage": "Tambah"
-  },
-  "customProviderForm.anthropicCompatible": {
-    "defaultMessage": "Kompatibel dengan Anthropic"
-  },
-  "customProviderForm.apiBasePath": {
-    "defaultMessage": "Jalur Dasar API (opsional)"
-  },
-  "customProviderForm.apiBasePathHint": {
-    "defaultMessage": "Timpa jalur API default. Biarkan kosong untuk menggunakan jalur default penyedia."
-  },
-  "customProviderForm.apiBasePathPlaceholder": {
-    "defaultMessage": "mis., v1/chat/completions atau project_id/v1"
-  },
-  "customProviderForm.apiKey": {
-    "defaultMessage": "Kunci API"
-  },
-  "customProviderForm.apiKeyPlaceholderExisting": {
-    "defaultMessage": "Biarkan kosong untuk mempertahankan kunci yang ada"
-  },
-  "customProviderForm.apiKeyPlaceholderNew": {
-    "defaultMessage": "Kunci API Anda"
-  },
-  "customProviderForm.apiKeyRequired": {
-    "defaultMessage": "Kunci API wajib diisi"
-  },
-  "customProviderForm.apiUrl": {
-    "defaultMessage": "URL API"
-  },
-  "customProviderForm.apiUrlPlaceholder": {
-    "defaultMessage": "https://api.example.com"
-  },
-  "customProviderForm.apiUrlRequired": {
-    "defaultMessage": "URL API wajib diisi"
-  },
-  "customProviderForm.attachments": {
-    "defaultMessage": "Lampiran"
-  },
-  "customProviderForm.authHint": {
-    "defaultMessage": "LLM lokal seperti Ollama biasanya tidak memerlukan kunci API."
-  },
-  "customProviderForm.authentication": {
-    "defaultMessage": "Autentikasi"
-  },
-  "customProviderForm.availableModels": {
-    "defaultMessage": "Model yang Tersedia (dipisahkan koma)"
-  },
-  "customProviderForm.back": {
-    "defaultMessage": "← Kembali"
-  },
-  "customProviderForm.cancel": {
-    "defaultMessage": "Batal"
-  },
-  "customProviderForm.cannotDeleteActive": {
-    "defaultMessage": "Anda tidak dapat menghapus penyedia ini selama sedang digunakan. Harap beralih ke model lain terlebih dahulu."
-  },
-  "customProviderForm.chooseSetup": {
-    "defaultMessage": "Pilih cara Anda ingin menyiapkan penyedia Anda."
-  },
-  "customProviderForm.clear": {
-    "defaultMessage": "Bersihkan"
-  },
-  "customProviderForm.configureManually": {
-    "defaultMessage": "Konfigurasikan secara manual"
-  },
-  "customProviderForm.configureManuallyDesc": {
-    "defaultMessage": "Masukkan sendiri semua detail penyedia"
-  },
-  "customProviderForm.confirmDelete": {
-    "defaultMessage": "Konfirmasi Hapus"
-  },
-  "customProviderForm.createProvider": {
-    "defaultMessage": "Buat Penyedia"
-  },
-  "customProviderForm.customHeaders": {
-    "defaultMessage": "Header Khusus"
-  },
-  "customProviderForm.customHeadersHint": {
-    "defaultMessage": "Tambahkan header HTTP khusus untuk disertakan dalam permintaan ke penyedia. Klik tombol \"+\" untuk menambahkan setelah mengisi kedua bidang."
-  },
-  "customProviderForm.deleteConfirmation": {
-    "defaultMessage": "Apakah Anda yakin ingin menghapus penyedia khusus ini? Tindakan ini akan menghapus penyedia secara permanen beserta kunci API yang tersimpan. Tindakan ini tidak dapat dibatalkan."
-  },
-  "customProviderForm.deleteProvider": {
-    "defaultMessage": "Hapus Penyedia"
-  },
-  "customProviderForm.displayName": {
-    "defaultMessage": "Nama Tampilan"
-  },
-  "customProviderForm.displayNamePlaceholder": {
-    "defaultMessage": "Nama Penyedia Anda"
-  },
-  "customProviderForm.displayNameRequired": {
-    "defaultMessage": "Nama tampilan wajib diisi"
-  },
-  "customProviderForm.docs": {
-    "defaultMessage": "Dokumentasi"
-  },
-  "customProviderForm.headerBothRequired": {
-    "defaultMessage": "Nama dan nilai header keduanya harus diisi"
-  },
-  "customProviderForm.headerDuplicate": {
-    "defaultMessage": "Header dengan nama ini sudah ada"
-  },
-  "customProviderForm.headerNamePlaceholder": {
-    "defaultMessage": "Nama header"
-  },
-  "customProviderForm.headerNoSpaces": {
-    "defaultMessage": "Nama header tidak boleh mengandung spasi"
-  },
-  "customProviderForm.modelsPlaceholder": {
-    "defaultMessage": "model-a, model-b, model-c"
-  },
-  "customProviderForm.modelsRequired": {
-    "defaultMessage": "Setidaknya satu model wajib diisi"
-  },
-  "customProviderForm.ollamaCompatible": {
-    "defaultMessage": "Kompatibel dengan Ollama"
-  },
-  "customProviderForm.openaiCompatible": {
-    "defaultMessage": "Kompatibel dengan OpenAI"
-  },
-  "customProviderForm.providerType": {
-    "defaultMessage": "Tipe Penyedia"
-  },
-  "customProviderForm.reasoning": {
-    "defaultMessage": "Penalaran"
-  },
-  "customProviderForm.requiresApiKey": {
-    "defaultMessage": "Penyedia ini memerlukan kunci API"
-  },
-  "customProviderForm.startFromTemplate": {
-    "defaultMessage": "Mulai dari templat penyedia"
-  },
-  "customProviderForm.startFromTemplateDesc": {
-    "defaultMessage": "Pilih penyedia yang dikenal dan kami akan mengisi konfigurasi secara otomatis"
-  },
-  "customProviderForm.submitError": {
-    "defaultMessage": "Gagal menyimpan penyedia. Harap periksa konfigurasi Anda dan coba lagi."
-  },
-  "customProviderForm.supportsStreaming": {
-    "defaultMessage": "Penyedia mendukung respons streaming"
-  },
-  "customProviderForm.toolCalling": {
-    "defaultMessage": "Pemanggilan alat"
-  },
-  "customProviderForm.updateProvider": {
-    "defaultMessage": "Perbarui Penyedia"
-  },
-  "customProviderForm.usingTemplate": {
-    "defaultMessage": "Menggunakan templat: {name}"
-  },
-  "customProviderForm.valuePlaceholder": {
-    "defaultMessage": "Nilai"
-  },
   "defaultCardButtons.configureSettings": {
     "defaultMessage": "Konfigurasikan pengaturan {name}"
   },
@@ -2813,23 +2657,8 @@
   "providerConfigurationModal.signingIn": {
     "defaultMessage": "Sedang masuk..."
   },
-  "providerGrid.addProvider": {
-    "defaultMessage": "Tambah Penyedia"
-  },
-  "providerGrid.addProviderTitle": {
-    "defaultMessage": "Tambah Penyedia"
-  },
   "providerGrid.chooseModel": {
     "defaultMessage": "Pilih Model"
-  },
-  "providerGrid.configureProvider": {
-    "defaultMessage": "Konfigurasikan Penyedia"
-  },
-  "providerGrid.editProvider": {
-    "defaultMessage": "Edit Penyedia"
-  },
-  "providerGrid.fromTemplateOrManual": {
-    "defaultMessage": "Dari templat atau penyiapan manual"
   },
   "providerGrid.noMatch": {
     "defaultMessage": "Tidak ada penyedia yang cocok dengan \"{query}\""
@@ -2839,12 +2668,6 @@
   },
   "providerLogo.alt": {
     "defaultMessage": "Logo {providerName}"
-  },
-  "providerSelector.addCustomProvider": {
-    "defaultMessage": "Tambahkan penyedia khusus"
-  },
-  "providerSelector.addCustomProviderTitle": {
-    "defaultMessage": "Tambah Penyedia Khusus"
   },
   "providerSelector.connectProvider": {
     "defaultMessage": "Hubungkan ke Penyedia"
