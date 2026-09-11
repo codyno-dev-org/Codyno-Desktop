@@ -5,6 +5,12 @@ on:
     types:
       - published
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release tag to receive the packages, for example v1.0.0
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -19,7 +25,7 @@ jobs:
           - arch: arm64
             runner: macos-14
           - arch: x64
-            runner: macos-15-intel
+            runner: macos-26-intel
 
     runs-on: ${{ matrix.runner }}
 
@@ -92,12 +98,13 @@ jobs:
           retention-days: 14
 
       - name: Upload CodyNo packages to release
-        if: github.event_name == 'release'
+        if: github.event_name == 'release' || inputs.release_tag != ''
         working-directory: ui/desktop
         env:
           GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag }}
         run: |
-          gh release upload "${{ github.event.release.tag_name }}" \
+          gh release upload "${RELEASE_TAG}" \
             out/make/zip/darwin/${{ matrix.arch }}/*.zip \
             out/make/zip/darwin/${{ matrix.arch }}/SHA256SUMS-${{ matrix.arch }}.txt \
             --clobber \
