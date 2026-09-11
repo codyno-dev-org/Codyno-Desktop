@@ -1,0 +1,140 @@
+name: Build CodyNo for Windows
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release tag to receive the package, for example v1.0.0
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    name: Package CodyNo Windows x64
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out CodyNo
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: ui/pnpm-lock.yaml
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.94.1
+          targets: x86_64-pc-windows-msvc
+
+      - name: Cache Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~\.cargo\registry
+            ~\.cargo\git
+            target
+          key: ${{ runner.os }}-x64-codyno-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-x64-codyno-cargo-
+
+      - name: Build CodyNo backend
+        shell: pwsh
+        run: cargo build --release --target x86_64-pc-windows-msvc -p goose-cli --bin goose --no-default-features --features portable-default
+
+      - name: Stage CodyNo backend
+        shell: bash
+        run: |
+          rm -rf ui/desktop/src/bin
+          mkdir -p ui/desktop/src/bin
+          cp target/x86_64-pc-windows-msvc/release/goose.exe ui/desktop/src/bin/goose.exe
+
+          if [ -d ui/desktop/src/platform/windows/bin ]; then
+            shopt -s nullglob
+            for file in ui/desktop/src/platform/windows/bin/*.exe \
+                        ui/desktop/src/platform/windows/bin/*.dll \
+                        ui/desktop/src/platform/windows/bin/*.cmd; do
+              filename="$(basename "$file")"
+              [ "$filename" = "goose.exe" ] || cp -f "$file" ui/desktop/src/bin/
+            done
+
+            if [ -d ui/desktop/src/platform/windows/bin/goose-npm ]; then
+              cp -r ui/desktop/src/platform/windows/bin/goose-npm ui/desktop/src/bin/
+            fi
+          fi
+
+      - name: Install desktop dependencies
+        working-directory: ui
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare CodyNo Windows binaries
+        working-directory: ui/desktop
+        shell: bash
+        env:
+          ELECTRON_PLATFORM: win32
+        run: node scripts/prepare-platform-binaries.js
+
+      - name: Package CodyNo
+        working-directory: ui/desktop
+        shell: bash
+        env:
+          ELECTRON_PLATFORM: win32
+        run: pnpm run make --platform=win32 --arch=x64
+
+      - name: Collect CodyNo package
+        working-directory: ui/desktop
+        shell: pwsh
+        run: |
+          $releaseDir = Join-Path (Get-Location) 'release-assets'
+          New-Item -ItemType Directory -Force -Path $releaseDir | Out-Null
+
+          $packages = @(Get-ChildItem -Path 'out/make' -Recurse -File -Filter '*.zip')
+          if ($packages.Count -eq 0) {
+            Write-Error 'No Windows package was produced'
+          }
+
+          foreach ($package in $packages) {
+            Copy-Item $package.FullName (Join-Path $releaseDir "CodyNo-windows-x64-$($package.Name)")
+          }
+
+          $hashes = Get-ChildItem -Path $releaseDir -File -Filter '*.zip' | ForEach-Object {
+            $hash = (Get-FileHash -Algorithm SHA256 -Path $_.FullName).Hash.ToLowerInvariant()
+            "$hash  $($_.Name)"
+          }
+          $hashes | Set-Content (Join-Path $releaseDir 'SHA256SUMS-windows-x64.txt')
+          Get-ChildItem $releaseDir | Format-Table Name, Length
+
+      - name: Upload CodyNo Windows package
+        uses: actions/upload-artifact@v4
+        with:
+          name: CodyNo-windows-x64
+          path: ui/desktop/release-assets/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload CodyNo package to release
+        if: github.event_name == 'release' || inputs.release_tag != ''
+        working-directory: ui/desktop
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag }}
+        run: |
+          $assets = @(Get-ChildItem -Path 'release-assets' -File | ForEach-Object { $_.FullName })
+          gh release upload $env:RELEASE_TAG @assets --clobber --repo '${{ github.repository }}'

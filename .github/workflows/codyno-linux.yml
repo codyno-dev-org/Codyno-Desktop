@@ -1,0 +1,149 @@
+name: Build CodyNo for Linux
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release tag to receive the packages, for example v1.0.0
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    name: Package CodyNo Linux ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x64
+            runner: ubuntu-22.04
+          - arch: arm64
+            runner: ubuntu-22.04-arm
+
+    steps:
+      - name: Check out CodyNo
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: ui/pnpm-lock.yaml
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.94.1
+
+      - name: Install Linux packaging dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            libasound2 \
+            libatk-bridge2.0-dev \
+            libdrm2 \
+            libgbm1 \
+            libnss3-dev \
+            libxcomposite1 \
+            libxdamage1 \
+            libxrandr2 \
+            libxss1 \
+            dpkg-dev \
+            elfutils \
+            fakeroot \
+            flatpak \
+            flatpak-builder \
+            rpm
+
+      - name: Set up Flatpak runtime
+        run: flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+      - name: Cache Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-${{ matrix.arch }}-codyno-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.arch }}-codyno-cargo-
+
+      - name: Install desktop dependencies
+        working-directory: ui
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CodyNo backend
+        run: cargo build --release -p goose-cli --bin goose --no-default-features --features portable-default
+
+      - name: Stage CodyNo backend
+        run: |
+          mkdir -p ui/desktop/src/bin
+          cp target/release/goose ui/desktop/src/bin/goose
+          chmod +x ui/desktop/src/bin/goose
+          file ui/desktop/src/bin/goose
+
+      - name: Package CodyNo
+        working-directory: ui/desktop
+        env:
+          ELECTRON_ARCH: ${{ matrix.arch }}
+          ELECTRON_PLATFORM: linux
+          GOOSE_DESKTOP_LINUX_VARIANT: standard
+        run: pnpm run make --platform=linux --arch=${{ matrix.arch }}
+
+      - name: Collect CodyNo packages
+        working-directory: ui/desktop
+        env:
+          PACKAGE_ARCH: ${{ matrix.arch }}
+        run: |
+          mkdir -p release-assets
+          found=0
+          while IFS= read -r -d '' package; do
+            found=1
+            filename="$(basename "$package")"
+            cp "$package" "release-assets/CodyNo-linux-${PACKAGE_ARCH}-${filename}"
+          done < <(find out/make -type f \( -name '*.deb' -o -name '*.rpm' -o -name '*.flatpak' -o -name '*.zip' \) -print0)
+
+          if [ "$found" -eq 0 ]; then
+            echo "No Linux packages were produced" >&2
+            find out/make -maxdepth 5 -type f -print >&2 || true
+            exit 1
+          fi
+
+          sha256sum release-assets/* > "release-assets/SHA256SUMS-linux-${PACKAGE_ARCH}.txt"
+          ls -lh release-assets
+
+      - name: Upload CodyNo Linux packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: CodyNo-linux-${{ matrix.arch }}
+          path: ui/desktop/release-assets/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload CodyNo packages to release
+        if: github.event_name == 'release' || inputs.release_tag != ''
+        working-directory: ui/desktop
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag }}
+        run: |
+          gh release upload "${RELEASE_TAG}" \
+            release-assets/* \
+            --clobber \
+            --repo "${{ github.repository }}"
