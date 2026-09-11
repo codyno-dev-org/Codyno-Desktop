@@ -1,7 +1,7 @@
 {
   "name": "codyno-app",
   "productName": "CodyNo",
-  "version": "1.49.0",
+  "version": "1.0.0",
   "description": "CodyNo AI agent desktop app",
   "engines": {
     "node": "^24.10.0",
