@@ -1041,7 +1041,7 @@
     "defaultMessage": "Extensions enabled here are used as the default for new chats. You can also toggle active extensions during chat."
   },
   "extensionsView.description": {
-    "defaultMessage": "These extensions use the Model Context Protocol (MCP). They can expand Goose's capabilities using three main components: Prompts, Resources, and Tools. {searchShortcut} to search."
+    "defaultMessage": "These extensions use the Model Context Protocol (MCP). They can expand CodyNo's capabilities using three main components: Prompts, Resources, and Tools. {searchShortcut} to search."
   },
   "extensionsView.heading": {
     "defaultMessage": "Extensions"
@@ -2001,7 +2001,7 @@
     "defaultMessage": "Provider name lookup"
   },
   "modelSettingsButtons.configureProviders": {
-    "defaultMessage": "Configure providers"
+    "defaultMessage": "Manage CodyNo account"
   },
   "modelSettingsButtons.switchModels": {
     "defaultMessage": "Switch models"

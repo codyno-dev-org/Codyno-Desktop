@@ -10,9 +10,9 @@ const i18n = defineMessages({
     id: 'modelSettingsButtons.switchModels',
     defaultMessage: 'Switch models',
   },
-  configureProviders: {
+  manageCodyNoAccount: {
     id: 'modelSettingsButtons.configureProviders',
-    defaultMessage: 'Configure providers',
+    defaultMessage: 'Manage CodyNo account',
   },
 });
 
@@ -51,7 +51,7 @@ export default function ModelSettingsButtons({ setView }: ConfigureModelButtonsP
             setView('ConfigureProviders');
           }}
         >
-          {intl.formatMessage(i18n.configureProviders)}
+          {intl.formatMessage(i18n.manageCodyNoAccount)}
         </Button>
       )}
     </div>

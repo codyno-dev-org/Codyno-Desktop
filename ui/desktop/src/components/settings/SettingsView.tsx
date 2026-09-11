@@ -8,20 +8,10 @@ import ConfigSettings from './config/ConfigSettings';
 import PromptsSettingsSection from './PromptsSettingsSection';
 import type { ExtensionConfig } from '../../types/extensions';
 import { MainPanelLayout } from '../Layout/MainPanelLayout';
-import {
-  Bot,
-  Share2,
-  Monitor,
-  MessageSquare,
-  FileText,
-  Keyboard,
-  HardDrive,
-  KeyRound,
-} from 'lucide-react';
+import { Bot, Share2, Monitor, MessageSquare, FileText, Keyboard, HardDrive } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import ChatSettingsSection from './chat/ChatSettingsSection';
 import KeyboardShortcutsSection from './keyboard/KeyboardShortcutsSection';
-import AuthSettingsSection from './auth/AuthSettingsSection';
 import LocalInferenceSection from './localInference/LocalInferenceSection';
 import { CONFIGURATION_ENABLED } from '../../updates';
 import { trackSettingsTabViewed } from '../../utils/analytics';
@@ -57,6 +47,8 @@ const i18n = defineMessages({
     id: 'settingsView.tabKeyboard',
     defaultMessage: 'Keyboard',
   },
+  // Kept in the catalog for translated locale parity; the Auth tab is not
+  // rendered in the CodyNo settings surface.
   tabAuth: {
     id: 'settingsView.tabAuth',
     defaultMessage: 'Auth',
@@ -107,7 +99,7 @@ export default function SettingsView({
         chat: 'chat',
         prompts: 'prompts',
         keyboard: 'keyboard',
-        auth: 'auth',
+        auth: 'models',
         'local-inference': 'local-inference',
       };
 
@@ -212,10 +204,6 @@ export default function SettingsView({
                     <Keyboard className="h-4 w-4" />
                     {intl.formatMessage(i18n.tabKeyboard)}
                   </TabsTrigger>
-                  <TabsTrigger value="auth" className="flex gap-2" data-testid="settings-auth-tab">
-                    <KeyRound className="h-4 w-4" />
-                    {intl.formatMessage(i18n.tabAuth)}
-                  </TabsTrigger>
                   <TabsTrigger value="app" className="flex gap-2" data-testid="settings-app-tab">
                     <Monitor className="h-4 w-4" />
                     {intl.formatMessage(i18n.tabApp)}
@@ -268,13 +256,6 @@ export default function SettingsView({
                   className="mt-0 focus-visible:outline-none focus-visible:ring-0"
                 >
                   <KeyboardShortcutsSection />
-                </TabsContent>
-
-                <TabsContent
-                  value="auth"
-                  className="mt-0 focus-visible:outline-none focus-visible:ring-0"
-                >
-                  <AuthSettingsSection />
                 </TabsContent>
 
                 <TabsContent
