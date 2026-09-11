@@ -2,7 +2,6 @@ use anyhow::Result;
 use async_trait::async_trait;
 use futures::future::BoxFuture;
 use goose_providers::cache_semantics::apply_chat_payload_breakpoints;
-use goose_providers::conversation::token_usage::ProviderUsage;
 use goose_providers::errors::ProviderError;
 use goose_providers::images::ImageFormat;
 use serde_json::Value;
@@ -14,9 +13,8 @@ use super::base::{
     ConfigKey, MessageStream, ModelInfo, Provider, ProviderDef, ProviderMetadata,
     DEFAULT_PROVIDER_TIMEOUT_SECS,
 };
-use super::openai_compatible::handle_response_openai_compat;
+use super::openai_compatible::{handle_status, stream_openai_compat};
 use super::retry::ProviderRetry;
-use super::utils::get_model;
 use crate::conversation::message::Message;
 use goose_providers::model::ModelConfig;
 use goose_providers::request_log::{start_log, LoggerHandleExt};
@@ -24,8 +22,10 @@ use rmcp::model::Tool;
 
 const LITELLM_PROVIDER_NAME: &str = "litellm";
 const LITELLM_DEFAULT_HOST: &str = "http://localhost:4000";
-pub const LITELLM_DEFAULT_MODEL: &str = "gpt-4o-mini";
-pub const LITELLM_DOC_URL: &str = "https://docs.litellm.ai/docs/";
+// CodyNo model IDs are account-specific and must be discovered from the
+// authenticated gateway instead of hardcoding a generic OpenAI model.
+pub const LITELLM_DEFAULT_MODEL: &str = "";
+pub const LITELLM_DOC_URL: &str = "https://codyno.dev";
 
 const MODEL_INFO_DISCOVERY_TIMEOUT: Duration = Duration::from_secs(5);
 const MODEL_INFO_FAILURE_TTL: Duration = Duration::from_secs(60);
@@ -136,7 +136,10 @@ impl LiteLLMProvider {
     }
 
     async fn fetch_models_from_api(&self) -> Result<Vec<ModelInfo>, ProviderError> {
-        let response = self.api_client.request("model/info").response_get().await?;
+        // `/v1/models` is the authenticated, per-session catalog. The
+        // administrative `/model/info` endpoint contains the full gateway
+        // catalog and would expose models the CodyNo account cannot use.
+        let response = self.api_client.request("v1/models").response_get().await?;
 
         if !response.status().is_success() {
             return Err(ProviderError::RequestFailed(format!(
@@ -150,44 +153,19 @@ impl LiteLLMProvider {
         })?;
 
         let models_data = response_json["data"].as_array().ok_or_else(|| {
-            ProviderError::RequestFailed("Missing data field in models response".to_string())
+            ProviderError::RequestFailed(
+                "CodyNo models response is missing its data field".to_string(),
+            )
         })?;
 
         let mut models = Vec::new();
         for model_data in models_data {
-            if let Some(model_name) = model_data["model_name"].as_str() {
-                if model_name.contains("/*") {
-                    continue;
-                }
-
-                let model_info = &model_data["model_info"];
-                let context_length = model_info["max_input_tokens"]
-                    .as_u64()
-                    .map(|limit| limit as usize);
-                let supports_cache_control = model_info["supports_prompt_caching"].as_bool();
-
-                let mut model_info_obj =
-                    ModelInfo::new(model_name).with_optional_context_limit(context_length);
-                model_info_obj.supports_cache_control = supports_cache_control;
-                models.push(model_info_obj);
+            if let Some(model_name) = model_data["id"].as_str() {
+                models.push(ModelInfo::new(model_name));
             }
         }
 
         Ok(models)
-    }
-
-    async fn post(
-        &self,
-        model_config: &ModelConfig,
-        payload: &Value,
-    ) -> Result<Value, ProviderError> {
-        let response = self
-            .api_client
-            .request(&self.base_path)
-            .model_headers(model_config)?
-            .response_post(payload)
-            .await?;
-        handle_response_openai_compat(response).await
     }
 
     async fn supports_cache_control(&self, model: &ModelConfig) -> bool {
@@ -205,8 +183,8 @@ impl goose_providers::base::ProviderDescriptor for LiteLLMProvider {
     fn metadata() -> ProviderMetadata {
         ProviderMetadata::new(
             LITELLM_PROVIDER_NAME,
-            "LiteLLM",
-            "LiteLLM proxy supporting multiple models with automatic prompt caching",
+            "CodyNo",
+            "CodyNo gateway for secure access to the available AI models",
             LITELLM_DEFAULT_MODEL,
             vec![],
             LITELLM_DOC_URL,
@@ -238,14 +216,14 @@ impl goose_providers::base::ProviderDescriptor for LiteLLMProvider {
             )
             .with_field(
                 "LITELLM_HOST",
-                "Host URL",
-                Some("https://your-proxy.example.com"),
+                "CodyNo gateway",
+                Some("https://models.codyno.dev"),
                 None,
             )
             .with_field(
                 "LITELLM_API_KEY",
-                "API Key",
-                Some("Paste your API key"),
+                "CodyNo session",
+                Some("Sign in through CodyNo"),
                 None,
             ),
         )
@@ -295,7 +273,7 @@ impl Provider for LiteLLMProvider {
             messages,
             tools,
             &ImageFormat::OpenAi,
-            false,
+            true,
         )?;
 
         if !model_config.prompt_cache_disabled() && self.supports_cache_control(model_config).await
@@ -303,23 +281,25 @@ impl Provider for LiteLLMProvider {
             apply_chat_payload_breakpoints(&mut payload);
         }
 
+        let mut log = start_log(model_config, &payload)?;
         let response = self
             .with_retry(|| async {
-                let payload_clone = payload.clone();
-                self.post(model_config, &payload_clone).await
+                handle_status(
+                    self.api_client
+                        .request(&self.base_path)
+                        .model_headers(model_config)?
+                        .streaming(true)
+                        .response_post(&payload)
+                        .await?,
+                )
+                .await
             })
-            .await?;
+            .await
+            .inspect_err(|e| {
+                let _ = log.error(e);
+            })?;
 
-        let message = goose_providers::formats::openai::response_to_message(&response)?;
-        let usage = goose_providers::formats::openai::get_usage(&response);
-        let response_model = get_model(&response);
-        let mut log = start_log(model_config, &payload)?;
-        log.write(&response, Some(&usage))?;
-        let provider_usage = ProviderUsage::new(response_model, usage);
-        Ok(super::base::stream_from_single_message(
-            message,
-            provider_usage,
-        ))
+        stream_openai_compat(response, log)
     }
 
     fn skip_canonical_filtering(&self) -> bool {
@@ -345,6 +325,10 @@ fn parse_custom_headers(headers_str: String) -> HashMap<String, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use futures::StreamExt;
+    use serde_json::json;
+    use wiremock::matchers::{body_partial_json, method, path};
+    use wiremock::{Mock, MockServer, ResponseTemplate};
 
     #[tokio::test]
     async fn context_limit_negative_caches_failed_model_info() {
@@ -421,5 +405,55 @@ mod tests {
             provider.get_context_limit("cached-model", None).await,
             32_000
         );
+    }
+
+    #[tokio::test]
+    async fn stream_requests_sse_and_forwards_multiple_events() {
+        let server = MockServer::start().await;
+        let sse_body = concat!(
+            "data: {\"id\":\"chatcmpl-test\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"Hello\"},\"finish_reason\":null}]}\n\n",
+            "data: {\"id\":\"chatcmpl-test\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{\"content\":\" CodyNo\"},\"finish_reason\":null}]}\n\n",
+            "data: {\"id\":\"chatcmpl-test\",\"object\":\"chat.completion.chunk\",\"choices\":[{\"index\":0,\"delta\":{},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1,\"completion_tokens\":2,\"total_tokens\":3}}\n\n",
+            "data: [DONE]\n\n"
+        );
+
+        Mock::given(method("POST"))
+            .and(path("/v1/chat/completions"))
+            .and(body_partial_json(json!({
+                "model": "stream-test-model",
+                "stream": true
+            })))
+            .respond_with(
+                ResponseTemplate::new(200)
+                    .insert_header("content-type", "text/event-stream")
+                    .set_body_string(sse_body),
+            )
+            .expect(1)
+            .mount(&server)
+            .await;
+
+        let provider = LiteLLMProvider {
+            api_client: ApiClient::new_with_tls(server.uri(), AuthMethod::NoAuth, None).unwrap(),
+            base_path: "v1/chat/completions".to_string(),
+            name: LITELLM_PROVIDER_NAME.to_string(),
+            cached_model_info: tokio::sync::Mutex::new(None),
+        };
+
+        let mut stream = provider
+            .stream(
+                &ModelConfig::new("stream-test-model"),
+                "You are CodyNo.",
+                &[Message::user().with_text("Say hello")],
+                &[],
+            )
+            .await
+            .unwrap();
+
+        let mut events = Vec::new();
+        while let Some(event) = stream.next().await {
+            events.push(event.unwrap());
+        }
+
+        assert!(events.len() >= 2, "expected incremental SSE events");
     }
 }

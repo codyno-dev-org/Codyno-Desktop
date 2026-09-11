@@ -1,13 +1,13 @@
 ---
-name: goose-doc-guide
-description: Reference goose documentation to create, configure, or explain goose-specific features like recipes, extensions, sessions, and providers. You MUST read the relevant goose docs before answering. You MUST NOT rely on training data or assumptions for any goose-specific fields, values, names, syntax, or commands.
+name: codyno-doc-guide
+description: Reference CodyNo documentation to create, configure, or explain CodyNo-specific features like recipes, extensions, sessions, and providers. You MUST read the relevant CodyNo docs before answering. You MUST NOT rely on training data or assumptions for any CodyNo-specific fields, values, names, syntax, or commands.
 ---
 
-Use this skill when working with **goose-specific features**:
+Use this skill when working with **CodyNo-specific features**:
 - Creating or editing recipes
 - Configuring extensions or providers
-- Explaining how goose features work
-- Any goose configuration or setup task
+- Explaining how CodyNo features work
+- Any CodyNo configuration or setup task
 
 Do NOT use this skill for:
 - General coding tasks unrelated to goose
@@ -32,7 +32,7 @@ this docs root as `<docs-root>`.
    - Use the temp files for subsequent searches instead of re-reading
 
 2. **Create/modify content**
-   - For goose configuration files:
+   - For CodyNo configuration files:
       - Consult schema/field reference documentation first
       - **Search the docs to extract the complete schema for each element you plan to use**
       - Extract example snippets to understand usage patterns
@@ -46,15 +46,15 @@ this docs root as `<docs-root>`.
 
 3. **MANDATORY VERIFICATION - CHECK ALL THESE ITEMS BEFORE STEP 4**
    Before writing your final answer:
-   - [ ] You MUST NOT rely on training data or assumptions for any goose-specific fields, values, names, syntax, or commands.
+   - [ ] You MUST NOT rely on training data or assumptions for any CodyNo-specific fields, values, names, syntax, or commands.
    - [ ] **Did you include "How to Use", CLI commands, or usage instructions?**
       - If YES and user didn't ask for it → **REMOVE IT NOW**
       - If YES and user asked for it → verify exact commands from the docs before including
-   - [ ] List all goose-specific items in your answer (commands, fields, syntax, values, how to use, explanations, etc.)
+   - [ ] List all CodyNo-specific items in your answer (commands, fields, syntax, values, how to use, explanations, etc.)
    - [ ] For each item, verify it is correct according to the docs. If not found, either read the relevant docs NOW and verify, or remove it (if user asked for it, state "I could not find documentation for [X]").
 
 4. **Provide your answer and include a "Verification Completed" section**
-   - For EACH goose-specific item in your response, cite the specific doc file where you verified it
+   - For EACH CodyNo-specific item in your response, cite the specific doc file where you verified it
 
 5. **List documentation links**
    - Only include docs actually used

@@ -50,7 +50,7 @@ pub static PLATFORM_EXTENSIONS: Lazy<HashMap<&'static str, PlatformExtensionDef>
                 name: todo::EXTENSION_NAME,
                 display_name: "Todo",
                 description:
-                    "Enable a todo list for goose so it can keep track of what it is doing",
+                    "Enable a todo list for CodyNo so it can keep track of what it is doing",
                 default_enabled: true,
                 unprefixed_tools: false,
                 hidden: false,
@@ -64,7 +64,7 @@ pub static PLATFORM_EXTENSIONS: Lazy<HashMap<&'static str, PlatformExtensionDef>
                 name: apps::EXTENSION_NAME,
                 display_name: "Apps",
                 description:
-                    "Create and manage custom Goose apps through chat. Apps are HTML/CSS/JavaScript and run in sandboxed windows.",
+                    "Create and manage custom CodyNo apps through chat. Apps are HTML/CSS/JavaScript and run in sandboxed windows.",
                 default_enabled: true,
                 unprefixed_tools: false,
                 hidden: false,

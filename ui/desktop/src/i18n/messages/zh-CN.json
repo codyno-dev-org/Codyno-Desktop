@@ -1296,10 +1296,10 @@
     "defaultMessage": "取消"
   },
   "importRecipeForm.deeplinkHint": {
-    "defaultMessage": "粘贴以“goose://recipe?config=”开头的配方深层链接"
+    "defaultMessage": "粘贴以“codyno://recipe?config=”开头的配方深层链接"
   },
   "importRecipeForm.deeplinkPlaceholder": {
-    "defaultMessage": "在此粘贴你的 goose://recipe?config=... 深层链接"
+    "defaultMessage": "在此粘贴你的 codyno://recipe?config=... 深层链接"
   },
   "importRecipeForm.example": {
     "defaultMessage": "示例"
@@ -2261,9 +2261,6 @@
   "onboardingSuccess.privacyTitle": {
     "defaultMessage": "隐私"
   },
-  "onboardingSuccess.shareUsageData": {
-    "defaultMessage": "分享匿名使用数据"
-  },
   "parameterInput.defaultValue": {
     "defaultMessage": "默认值"
   },
@@ -2669,32 +2666,8 @@
   "providerLogo.alt": {
     "defaultMessage": "{providerName} 徽标"
   },
-  "providerSelector.connectProvider": {
-    "defaultMessage": "连接提供商"
-  },
-  "providerSelector.connectProviderDescription": {
-    "defaultMessage": "连接 OpenAI、Anthropic、Google 等"
-  },
-  "providerSelector.localModelDescription": {
-    "defaultMessage": "下载模型并完全运行在你的机器上。无需 API 密钥，无需账号。"
-  },
-  "providerSelector.selectProvider": {
-    "defaultMessage": "选择提供商"
-  },
-  "providerSelector.useLocalModel": {
-    "defaultMessage": "使用本地模型"
-  },
-  "providerSettings.configurationSettings": {
-    "defaultMessage": "提供商配置项"
-  },
-  "providerSettings.loadingProviders": {
-    "defaultMessage": "正在加载提供商…"
-  },
   "providerSettings.onboardingDescription": {
     "defaultMessage": "选择一个 AI 模型提供商来开始使用 goose。你需要用各提供商生成的 API 密钥，密钥将加密后本地存储。你随时可以在设置中更改提供商。"
-  },
-  "providerSettings.otherProviders": {
-    "defaultMessage": "其他提供商"
   },
   "providerSetupActions.cancel": {
     "defaultMessage": "取消"
@@ -3264,7 +3237,7 @@
     "defaultMessage": "深层链接"
   },
   "scheduleModal.deepLinkPlaceholder": {
-    "defaultMessage": "在此粘贴 goose://recipe 链接…"
+    "defaultMessage": "在此粘贴 codyno://recipe 链接…"
   },
   "scheduleModal.editSchedule": {
     "defaultMessage": "编辑计划"
@@ -3279,7 +3252,7 @@
     "defaultMessage": "读取所选文件失败。"
   },
   "scheduleModal.invalidDeepLink": {
-    "defaultMessage": "深层链接无效。请使用 goose://recipe 链接。"
+    "defaultMessage": "深层链接无效。请使用 codyno://recipe 链接。"
   },
   "scheduleModal.invalidFileType": {
     "defaultMessage": "文件类型无效：请选择 YAML 文件（.yaml 或 .yml）"
@@ -3663,7 +3636,7 @@
     "defaultMessage": "粘贴 Goose Nostr 分享链接以获取、解密并导入会话。"
   },
   "sessions.importNostr.placeholder": {
-    "defaultMessage": "goose://sessions/nostr?nevent=...&key=..."
+    "defaultMessage": "codyno://sessions/nostr?nevent=...&key=..."
   },
   "sessions.importNostr.title": {
     "defaultMessage": "导入 Nostr 会话"
@@ -4331,9 +4304,6 @@
   "toolConfirmation.allowToolCallWithName": {
     "defaultMessage": "允许 {toolName} 吗？"
   },
-  "toolConfirmation.gooseWouldLikeToCallWithName": {
-    "defaultMessage": "Goose 想调用 {toolName}，允许吗？"
-  },
   "updateSection.autoDownload": {
     "defaultMessage": "更新将在后台自动下载。"
   },
@@ -4489,5 +4459,59 @@
   },
   "providerConfigurationModal.deviceCodeVisit": {
     "defaultMessage": "访问"
+  },
+  "providerSelector.codeLabel": {
+    "defaultMessage": "Your sign-in code"
+  },
+  "providerSelector.connected": {
+    "defaultMessage": "Connected to CodyNo"
+  },
+  "providerSelector.connectedDescription": {
+    "defaultMessage": "Your CodyNo account is connected. Requests use the CodyNo gateway."
+  },
+  "providerSelector.denied": {
+    "defaultMessage": "This sign-in request was denied. Start again when you are ready."
+  },
+  "providerSelector.description": {
+    "defaultMessage": "Sign in with your CodyNo account. Your requests will be routed through the CodyNo AI gateway."
+  },
+  "providerSelector.error": {
+    "defaultMessage": "CodyNo sign-in could not be completed. Please try again."
+  },
+  "providerSelector.expired": {
+    "defaultMessage": "This sign-in code expired. Start again to get a new code."
+  },
+  "providerSelector.openBrowser": {
+    "defaultMessage": "Open CodyNo in browser"
+  },
+  "providerSelector.retry": {
+    "defaultMessage": "Try again"
+  },
+  "providerSelector.signIn": {
+    "defaultMessage": "Sign in with CodyNo"
+  },
+  "providerSelector.signingIn": {
+    "defaultMessage": "Starting CodyNo sign-in…"
+  },
+  "providerSelector.title": {
+    "defaultMessage": "Sign in to CodyNo"
+  },
+  "providerSelector.waiting": {
+    "defaultMessage": "Finish signing in in your browser. CodyNo will connect automatically when you approve this device."
+  },
+  "providerSettings.connected": {
+    "defaultMessage": "CodyNo is connected"
+  },
+  "providerSettings.onboardingTitle": {
+    "defaultMessage": "Connect CodyNo"
+  },
+  "providerSettings.settingsDescription": {
+    "defaultMessage": "Manage the CodyNo account used by this desktop app. All model requests go through CodyNo."
+  },
+  "providerSettings.settingsTitle": {
+    "defaultMessage": "CodyNo account"
+  },
+  "toolConfirmation.codynoWouldLikeToCallWithName": {
+    "defaultMessage": "CodyNo would like to call {toolName}. Allow?"
   }
 }

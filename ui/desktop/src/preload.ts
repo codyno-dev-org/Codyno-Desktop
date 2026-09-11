@@ -87,6 +87,17 @@ interface UpdaterEvent {
   data?: unknown;
 }
 
+type CodyNoDeviceAuthStartResponse = {
+  code: string;
+  verificationUrl: string;
+  expiresIn: number;
+};
+
+type CodyNoDeviceAuthPollResponse = {
+  status: number;
+  body: unknown;
+};
+
 export interface CreateChatWindowOptions {
   query?: string;
   dir?: string;
@@ -160,6 +171,8 @@ type ElectronAPI = {
     tokensUpdated?: boolean;
   }) => void;
   openExternal: (url: string) => Promise<OpenExternalUrlResult>;
+  startCodyNoDeviceAuth: () => Promise<CodyNoDeviceAuthStartResponse>;
+  pollCodyNoDeviceAuth: (code: string) => Promise<CodyNoDeviceAuthPollResponse>;
   // Update-related functions
   getVersion: () => string;
   checkForUpdates: () => Promise<{ updateInfo: unknown; error: string | null }>;
@@ -304,6 +317,10 @@ const electronAPI: ElectronAPI = {
   openExternal: (url: string): Promise<OpenExternalUrlResult> => {
     return ipcRenderer.invoke('open-external', url);
   },
+  startCodyNoDeviceAuth: (): Promise<CodyNoDeviceAuthStartResponse> =>
+    ipcRenderer.invoke('codyno-device-auth-start'),
+  pollCodyNoDeviceAuth: (code: string): Promise<CodyNoDeviceAuthPollResponse> =>
+    ipcRenderer.invoke('codyno-device-auth-poll', code),
   getVersion: (): string => {
     return config.GOOSE_VERSION || ipcRenderer.sendSync('get-app-version') || '';
   },

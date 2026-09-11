@@ -8,39 +8,39 @@ const i18n = defineMessages({
   },
   description: {
     id: 'privacyInfoModal.description',
-    defaultMessage: 'Anonymous usage data helps us understand how goose is used and identify areas for improvement.',
+    defaultMessage: 'CodyNo telemetry is disabled. Your conversations and code stay out of analytics.',
   },
   whatWeCollect: {
     id: 'privacyInfoModal.whatWeCollect',
-    defaultMessage: 'What we collect:',
+    defaultMessage: 'CodyNo does not collect:',
   },
   collectOs: {
     id: 'privacyInfoModal.collectOs',
-    defaultMessage: 'Operating system, version, and architecture',
+    defaultMessage: 'Conversations or code',
   },
   collectVersion: {
     id: 'privacyInfoModal.collectVersion',
-    defaultMessage: 'goose version and install method',
+    defaultMessage: 'Provider credentials or model prompts',
   },
   collectProvider: {
     id: 'privacyInfoModal.collectProvider',
-    defaultMessage: 'Provider and model used',
+    defaultMessage: 'Personal usage analytics',
   },
   collectExtensions: {
     id: 'privacyInfoModal.collectExtensions',
-    defaultMessage: 'Extensions and tool usage counts (names only)',
+    defaultMessage: 'Background telemetry',
   },
   collectSession: {
     id: 'privacyInfoModal.collectSession',
-    defaultMessage: 'Session metrics (duration, interaction count, token usage)',
+    defaultMessage: 'Automatic updater checks',
   },
   collectErrors: {
     id: 'privacyInfoModal.collectErrors',
-    defaultMessage: 'Error types (e.g., "rate_limit", "auth" - no details)',
+    defaultMessage: 'Third-party provider account data',
   },
   neverCollect: {
     id: 'privacyInfoModal.neverCollect',
-    defaultMessage: 'We never collect your conversations, code, tool arguments, error messages, or any personal data. You can change this setting anytime in Settings.',
+    defaultMessage: 'Telemetry and automatic updates are disabled for CodyNo.',
   },
 });
 

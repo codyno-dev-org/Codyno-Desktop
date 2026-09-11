@@ -105,21 +105,21 @@ describe('addExtensionFromDeepLink', () => {
       );
     });
 
-    it('should reject legacy goosed deeplinks', async () => {
+    it('should reject legacy goose deeplinks before command parsing', async () => {
       vi.mocked(toastService.handleError).mockImplementationOnce(() => {
-        throw new Error('Invalid command');
+        throw new Error('Invalid protocol');
       });
 
       const url =
         'goose://extension?cmd=goosed&arg=mcp&arg=memory&name=Memory&description=Memory';
 
       await expect(addExtensionFromDeepLink(url, mockAddExtension, mockSetView)).rejects.toThrow(
-        'Invalid command'
+        'Invalid protocol'
       );
 
       expect(toastService.handleError).toHaveBeenCalledWith(
-        'Invalid Command',
-        expect.stringContaining('Invalid command: goosed'),
+        'Invalid Protocol',
+        expect.stringContaining('codyno:// scheme'),
         { shouldThrow: true }
       );
       expect(mockAddExtension).not.toHaveBeenCalled();

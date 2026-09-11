@@ -5,6 +5,8 @@ import { acpListProviderDetails } from '../../../acp/providers';
 import { fetchModelsForProviders } from '../../settings/models/modelInterface';
 import { defineMessages, useIntl } from '../../../i18n';
 
+const CODYNO_PROVIDER_ID = 'litellm';
+
 const i18n = defineMessages({
   fetchError: {
     id: 'recipeModelSelector.fetchError',
@@ -70,7 +72,6 @@ export const RecipeModelSelector = ({
   onModelChange,
 }: RecipeModelSelectorProps) => {
   const intl = useIntl();
-  const [providerOptions, setProviderOptions] = useState<{ value: string; label: string }[]>([]);
   const [modelOptions, setModelOptions] = useState<
     { options: { value: string; label: string; provider: string }[] }[]
   >([]);
@@ -83,15 +84,12 @@ export const RecipeModelSelector = ({
       try {
         setFetchError(null);
         const providersResponse = await acpListProviderDetails();
-        const activeProviders = providersResponse.filter((provider) => provider.is_configured);
-
-        setProviderOptions([
-          { value: '', label: intl.formatMessage(i18n.useDefaultProvider) },
-          ...activeProviders.map(({ metadata, name }) => ({
-            value: name,
-            label: metadata.display_name,
-          })),
-        ]);
+        const activeProviders = providersResponse.filter(
+          (provider) => provider.name === CODYNO_PROVIDER_ID && provider.is_configured
+        );
+        if (selectedProvider !== CODYNO_PROVIDER_ID) {
+          onProviderChange(CODYNO_PROVIDER_ID);
+        }
 
         setLoadingModels(true);
         const results = await fetchModelsForProviders(activeProviders);
@@ -131,33 +129,22 @@ export const RecipeModelSelector = ({
         setLoadingModels(false);
       }
     })();
-  }, [intl]);
+  }, [intl, onProviderChange, selectedProvider]);
 
   useEffect(() => {
-    if (!loadingModels && selectedModel && selectedProvider) {
+    if (!loadingModels && selectedModel) {
       const allModels = modelOptions.flatMap((group) => group.options);
       const modelExists = allModels.some(
-        (opt) => opt.value === selectedModel && opt.provider === selectedProvider
+        (opt) => opt.value === selectedModel && opt.provider === CODYNO_PROVIDER_ID
       );
       if (!modelExists) {
         setIsCustomModel(true);
       }
     }
-  }, [loadingModels, modelOptions, selectedModel, selectedProvider]);
+  }, [loadingModels, modelOptions, selectedModel]);
 
-  const filteredModelOptions = selectedProvider
-    ? modelOptions.filter((group) => group.options[0]?.provider === selectedProvider)
-    : [];
-
-  const handleProviderChange = useCallback(
-    (newValue: unknown) => {
-      const option = newValue as { value: string; label: string } | null;
-      const providerValue = option?.value || undefined;
-      onProviderChange(providerValue === '' ? undefined : providerValue);
-      onModelChange(undefined);
-      setIsCustomModel(false);
-    },
-    [onProviderChange, onModelChange]
+  const filteredModelOptions = modelOptions.filter(
+    (group) => group.options[0]?.provider === CODYNO_PROVIDER_ID
   );
 
   const handleModelChange = useCallback(
@@ -182,25 +169,9 @@ export const RecipeModelSelector = ({
         </div>
       )}
       <div>
-        <label className="block text-sm font-medium text-textStandard mb-2">
-          {intl.formatMessage(i18n.providerLabel)}
-        </label>
-        <p className="text-xs text-textSubtle mb-2">
-          {intl.formatMessage(i18n.providerHint)}
-        </p>
-        <Select
-          options={providerOptions}
-          value={
-            selectedProvider
-              ? providerOptions.find((opt) => opt.value === selectedProvider) || null
-              : providerOptions.find((opt) => opt.value === '') || null
-          }
-          onChange={handleProviderChange}
-          placeholder={intl.formatMessage(i18n.selectProvider)}
-          isClearable
-        />
+        <label className="block text-sm font-medium text-textStandard mb-2">Provider</label>
+        <p className="text-xs text-textSubtle">CodyNo gateway (fixed)</p>
       </div>
-
       <div>
         <div className="flex justify-between items-center mb-2">
           <label className="block text-sm font-medium text-textStandard">{intl.formatMessage(i18n.modelLabel)}</label>

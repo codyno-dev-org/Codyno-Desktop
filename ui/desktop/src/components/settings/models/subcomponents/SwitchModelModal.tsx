@@ -26,10 +26,12 @@ import Model, {
   fetchModelsForProviders,
   getProviderMetadata,
 } from '../modelInterface';
-import { getPredefinedModelsFromEnv, shouldShowPredefinedModels } from '../predefinedModelsUtils';
+import { getPredefinedModelsFromEnv } from '../predefinedModelsUtils';
 import type { ProviderDetails, ProviderType, ThinkingEffort } from '../../../../types/providers';
 import { trackModelChanged } from '../../../../utils/analytics';
 import { addToRecentModels } from '../../../../utils/recentModels';
+
+const CODYNO_PROVIDER_ID = 'litellm';
 
 const i18n = defineMessages({
   thinkingEffortOff: {
@@ -78,7 +80,7 @@ const i18n = defineMessages({
   },
   description: {
     id: 'switchModelModal.description',
-    defaultMessage: 'Select a provider and model to use for your conversations.',
+    defaultMessage: 'Select a CodyNo model to use for your conversations.',
   },
   chooseModel: {
     id: 'switchModelModal.chooseModel',
@@ -254,7 +256,7 @@ export const SwitchModelModal = ({
   onClose,
   setView,
   onModelSelected,
-  initialProvider,
+  initialProvider: _initialProvider,
   titleOverride,
   sessionModel,
   sessionProvider,
@@ -277,7 +279,6 @@ export const SwitchModelModal = ({
   // Use session-specific model/provider if available, otherwise fall back to config defaults
   const currentModel = sessionModel ?? configModel;
   const currentProvider = sessionProvider ?? configProvider;
-  const [providerOptions, setProviderOptions] = useState<{ value: string; label: string }[]>([]);
   type ModelOption = {
     value: string;
     label: string;
@@ -286,11 +287,9 @@ export const SwitchModelModal = ({
     reasoning?: boolean;
   };
   const [modelOptions, setModelOptions] = useState<{ options: ModelOption[] }[]>([]);
-  const [provider, setProvider] = useState<string | null>(
-    initialProvider || currentProvider || null
-  );
+  const [provider, setProvider] = useState<string | null>(CODYNO_PROVIDER_ID);
   const [model, setModel] = useState<string>(
-    initialProvider && initialProvider !== currentProvider ? '' : currentModel || ''
+    currentProvider === CODYNO_PROVIDER_ID ? currentModel || '' : ''
   );
   const [isCustomModel, setIsCustomModel] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
@@ -299,7 +298,7 @@ export const SwitchModelModal = ({
   });
   const [isValid, setIsValid] = useState(true);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
-  const [usePredefinedModels] = useState(shouldShowPredefinedModels());
+  const usePredefinedModels = false;
   const [selectedPredefinedModel, setSelectedPredefinedModel] = useState<Model | null>(null);
   const [predefinedModels, setPredefinedModels] = useState<Model[]>([]);
   const [loadingModels, setLoadingModels] = useState<boolean>(false);
@@ -372,11 +371,6 @@ export const SwitchModelModal = ({
         formIsValid = false;
       }
     } else {
-      if (!provider) {
-        errors.provider = intl.formatMessage(i18n.selectProvider);
-        formIsValid = false;
-      }
-
       if (!model) {
         errors.model = intl.formatMessage(i18n.selectOrEnterModel);
         formIsValid = false;
@@ -386,7 +380,7 @@ export const SwitchModelModal = ({
     setValidationErrors(errors);
     setIsValid(formIsValid);
     return formIsValid;
-  }, [model, provider, usePredefinedModels, selectedPredefinedModel, intl]);
+  }, [model, usePredefinedModels, selectedPredefinedModel, intl]);
 
   const handleClose = () => {
     onClose();
@@ -402,11 +396,11 @@ export const SwitchModelModal = ({
       if (usePredefinedModels && selectedPredefinedModel) {
         modelObj = selectedPredefinedModel;
       } else {
-        const providerMetaData = await getProviderMetadata(provider || '');
+        const providerMetaData = await getProviderMetadata(CODYNO_PROVIDER_ID);
         const providerDisplayName = providerMetaData.display_name;
         modelObj = {
           name: model,
-          provider: provider,
+          provider: CODYNO_PROVIDER_ID,
           subtext: providerDisplayName,
         } as Model;
       }
@@ -452,7 +446,9 @@ export const SwitchModelModal = ({
   // Separate effect so it re-runs when currentModel loads asynchronously.
   useEffect(() => {
     if (!usePredefinedModels || !currentModel) return;
-    const models = getPredefinedModelsFromEnv();
+    const models = getPredefinedModelsFromEnv().filter(
+      (candidate) => candidate.provider === CODYNO_PROVIDER_ID
+    );
     const matchingModel = models.find((m) => m.name === currentModel);
     if (matchingModel) {
       setSelectedPredefinedModel(matchingModel);
@@ -471,35 +467,28 @@ export const SwitchModelModal = ({
   const manualSyncDone = useRef(false);
   useEffect(() => {
     if (usePredefinedModels || manualSyncDone.current) return;
-    if (initialProvider && initialProvider !== currentProvider) return;
     if (currentModel && currentProvider) {
-      if (!provider) setProvider(currentProvider);
       if (!model) setModel(currentModel);
       manualSyncDone.current = true;
     }
-  }, [currentModel, currentProvider, usePredefinedModels, provider, model, initialProvider]);
+  }, [currentModel, currentProvider, usePredefinedModels, provider, model]);
 
   useEffect(() => {
     if (usePredefinedModels) {
-      const models = getPredefinedModelsFromEnv();
+      const models = getPredefinedModelsFromEnv().filter(
+        (candidate) => candidate.provider === CODYNO_PROVIDER_ID
+      );
       setPredefinedModels(models);
     }
 
     (async () => {
       try {
         const providersResponse = await acpListProviderDetails();
-        const activeProviders = providersResponse.filter((provider) => provider.is_configured);
+        const activeProviders = providersResponse.filter(
+          (candidate) => candidate.name === CODYNO_PROVIDER_ID && candidate.is_configured
+        );
         setActiveProvidersList(activeProviders);
-        setProviderOptions([
-          ...activeProviders.map(({ metadata, name }) => ({
-            value: name,
-            label: metadata.display_name,
-          })),
-          {
-            value: 'configure_providers',
-            label: intl.formatMessage(i18n.useOtherProvider),
-          },
-        ]);
+        setProvider(CODYNO_PROVIDER_ID);
       } catch (error: unknown) {
         console.error('Failed to query providers:', error);
       }
@@ -650,7 +639,7 @@ export const SwitchModelModal = ({
     if (selectedOption?.value === 'custom') {
       setIsCustomModel(true);
       setModel('');
-      setProvider(selectedOption.provider);
+      setProvider(CODYNO_PROVIDER_ID);
       setSelectedModelReasoning(null);
       setUserClearedModel(false);
     } else if (selectedOption === null) {
@@ -662,7 +651,7 @@ export const SwitchModelModal = ({
     } else {
       setIsCustomModel(false);
       setModel(selectedOption?.value || '');
-      setProvider(selectedOption?.provider || '');
+      setProvider(CODYNO_PROVIDER_ID);
       if (selectedOption?.provider && selectedOption.value) {
         resolveSelectedModelReasoning(
           selectedOption.provider,
@@ -713,7 +702,7 @@ export const SwitchModelModal = ({
             {
               value: trimmedInput,
               label: `Use: "${trimmedInput}"`,
-              provider: provider,
+            provider: CODYNO_PROVIDER_ID,
             },
           ],
         },
@@ -816,33 +805,7 @@ export const SwitchModelModal = ({
               {thinkingEffortControl}
             </div>
           ) : (
-            /* Manual Provider/Model Selection */
             <div className="w-full flex flex-col gap-4">
-              <div>
-                <Select
-                  options={providerOptions}
-                  value={providerOptions.find((option) => option.value === provider) || null}
-                  onChange={(newValue: unknown) => {
-                    const option = newValue as { value: string; label: string } | null;
-                    if (option?.value === 'configure_providers') {
-                      // Navigate to ConfigureProviders view
-                      setView('ConfigureProviders');
-                      onClose(); // Close the current modal
-                    } else {
-                      setProvider(option?.value || null);
-                      setModel('');
-                      setIsCustomModel(false);
-                      setUserClearedModel(false);
-                    }
-                  }}
-                  placeholder={intl.formatMessage(i18n.providerPlaceholder)}
-                  isClearable
-                />
-                {attemptedSubmit && validationErrors.provider && (
-                  <div className="text-red-500 text-sm mt-1">{validationErrors.provider}</div>
-                )}
-              </div>
-
               {provider && (
                 <>
                   {provider === 'local' &&

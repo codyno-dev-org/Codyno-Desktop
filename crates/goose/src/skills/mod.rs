@@ -111,11 +111,11 @@ const DEFAULT_GOOSE_DOCS_ROOT: &str = "https://goose-docs.ai";
 const GOOSE_DOCS_ROOT_PLACEHOLDER: &str = "{{GOOSE_DOCS_ROOT}}";
 
 /// Substitute the `{{GOOSE_DOCS_ROOT}}` placeholder in the builtin
-/// `goose-doc-guide` skill with the resolved docs root. Resolution is
+/// `codyno-doc-guide` skill with the resolved docs root. Resolution is
 /// deterministic: the configured `GOOSE_DOCS_ROOT` if set, otherwise the
 /// canonical online docs root.
 fn resolve_docs_root_placeholder(skill: &SourceEntry, content: &str, docs_root: &str) -> String {
-    if skill.name != "goose-doc-guide" || skill.source_type != SourceType::BuiltinSkill {
+    if skill.name != "codyno-doc-guide" || skill.source_type != SourceType::BuiltinSkill {
         return content.to_string();
     }
 
@@ -718,10 +718,10 @@ mod tests {
     fn builtin_goose_doc_guide_skill() -> SourceEntry {
         SourceEntry {
             source_type: SourceType::BuiltinSkill,
-            name: "goose-doc-guide".to_string(),
+            name: "codyno-doc-guide".to_string(),
             description: "Test docs skill".to_string(),
             content: "Docs root: {{GOOSE_DOCS_ROOT}}.".to_string(),
-            path: "builtin://skills/goose-doc-guide".to_string(),
+            path: "builtin://skills/codyno-doc-guide".to_string(),
             global: true,
             writable: true,
             supporting_files: Vec::new(),

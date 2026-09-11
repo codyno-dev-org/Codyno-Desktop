@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertTriangle, Download, Github } from 'lucide-react';
+import { AlertTriangle, Download, ExternalLink } from 'lucide-react';
 import { Button } from './button';
 import { toastError } from '../../toasts';
 import { defineMessages, useIntl } from '../../i18n';
@@ -13,7 +13,7 @@ const i18n = defineMessages({
   description: {
     id: 'diagnosticsModal.description',
     defaultMessage:
-      'You can download a diagnostics JSON report to share with the team, or file a bug directly on GitHub with your system details pre-filled. A diagnostics report contains the following:',
+      'You can download a diagnostics JSON report to share with the CodyNo team. A diagnostics report contains the following:',
   },
   systemInfo: {
     id: 'diagnosticsModal.systemInfo',
@@ -58,7 +58,7 @@ const i18n = defineMessages({
   },
   fileBug: {
     id: 'diagnosticsModal.fileBug',
-    defaultMessage: 'File Bug on GitHub',
+    defaultMessage: 'Contact CodyNo',
   },
   diagnosticsErrorTitle: {
     id: 'diagnosticsModal.diagnosticsErrorTitle',
@@ -121,74 +121,13 @@ export const DiagnosticsModal: React.FC<DiagnosticsModalProps> = ({
     }
   };
 
-  const handleFileGitHubIssue = async () => {
+  const handleContactCodyNo = async () => {
     setIsFilingBug(true);
 
     try {
-      const report = await getDiagnosticsReport(sessionId, 'summary');
-      const info = report.system;
-
-      const providerModel =
-        info.provider && info.model
-          ? `${info.provider} - ${info.model}`
-          : info.provider || info.model || '[e.g. Google – gemini-1.5-pro]';
-
-      const extensions =
-        info.enabled_extensions.length > 0
-          ? info.enabled_extensions.join(', ')
-          : '[e.g. Computer Controller, Figma]';
-
-      const body = `**Describe the bug**
-
-💡 Before filing, please check common issues:  
-https://goose-docs.ai/docs/troubleshooting  
-
-📦 To help us debug faster, attach your **diagnostics JSON report** if possible.  
-👉 How to capture it: https://goose-docs.ai/docs/troubleshooting/diagnostics-and-reporting/
-
-A clear and concise description of what the bug is.
-
----
-
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
----
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
----
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
----
-
-**Please provide the following information**
-- **OS & Arch:** ${info.os} ${info.os_version} ${info.architecture}
-- **Interface:** UI
-- **Version:** ${info.app_version}
-- **Extensions enabled:** ${extensions}
-- **Provider & Model:** ${providerModel}
-
----
-
-**Additional context**
-Add any other context about the problem here.
-`;
-
-      const params = new URLSearchParams({
-        template: 'bug_report.md',
-        body: body,
-        labels: 'bug',
-      });
-
-      window.open(`https://github.com/aaif-goose/goose/issues/new?${params.toString()}`, '_blank');
+      // Keep diagnostic contents local; CodyNo can be opened without placing
+      // system and session details into a third-party URL.
+      window.open('https://codyno.dev', '_blank');
       onClose();
     } catch {
       toastError({
@@ -245,13 +184,13 @@ Add any other context about the problem here.
             {isDownloading ? intl.formatMessage(i18n.downloading) : intl.formatMessage(i18n.download)}
           </Button>
           <Button
-            onClick={handleFileGitHubIssue}
+            onClick={handleContactCodyNo}
             variant="outline"
             size="sm"
             disabled={isDownloading || isFilingBug}
             className="bg-slate-600 text-white hover:bg-slate-700"
           >
-            <Github size={16} className="mr-1" />
+            <ExternalLink size={16} className="mr-1" />
             {isFilingBug ? intl.formatMessage(i18n.opening) : intl.formatMessage(i18n.fileBug)}
           </Button>
         </div>

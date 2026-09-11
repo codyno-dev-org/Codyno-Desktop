@@ -143,16 +143,9 @@ export const ModelAndProviderProvider: React.FC<ModelAndProviderProviderProps> =
   );
 
   const getFallbackModelAndProvider = useCallback(async () => {
-    const provider = window.appConfig.get('GOOSE_DEFAULT_PROVIDER') as string;
-    const model = window.appConfig.get('GOOSE_DEFAULT_MODEL') as string;
-    if (provider && model) {
-      try {
-        await acpSaveDefaults(provider, model);
-      } catch (error) {
-        console.error('[getFallbackModelAndProvider] Failed to write to config', error);
-      }
-    }
-    return { model: model, provider: provider };
+    // CodyNo models are account-specific. Keep the empty state until the
+    // gateway returns a live model instead of inventing a fallback model.
+    return { model: '', provider: '' };
   }, []);
 
   const getCurrentModelAndProvider = useCallback(async () => {

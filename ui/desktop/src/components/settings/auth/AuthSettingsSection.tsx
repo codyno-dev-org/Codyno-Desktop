@@ -21,7 +21,7 @@ const i18n = defineMessages({
   },
   description: {
     id: 'authSettings.description',
-    defaultMessage: 'Manage provider credentials stored locally by goose.',
+    defaultMessage: 'Manage the CodyNo account used by this desktop app.',
   },
   loading: {
     id: 'authSettings.loading',

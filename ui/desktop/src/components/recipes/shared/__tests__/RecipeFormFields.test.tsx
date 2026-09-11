@@ -887,7 +887,7 @@ describe('RecipeFormFields', () => {
 
       await expandAdvancedSection(user);
 
-      expect(screen.getByText('Provider (Optional)')).toBeInTheDocument();
+      expect(screen.getByText('CodyNo gateway (fixed)')).toBeInTheDocument();
       expect(screen.getByText('Extensions (Optional)')).toBeInTheDocument();
     });
 
@@ -921,7 +921,7 @@ describe('RecipeFormFields', () => {
 
       await expandAdvancedSection(user);
 
-      expect(screen.getByText('Provider (Optional)')).toBeInTheDocument();
+      expect(screen.getByText('CodyNo gateway (fixed)')).toBeInTheDocument();
     });
 
     it('allows selecting extensions', async () => {
@@ -976,7 +976,7 @@ describe('RecipeFormFields', () => {
 
       await expandAdvancedSection(user);
 
-      expect(screen.getByText('Provider (Optional)')).toBeInTheDocument();
+      expect(screen.getByText('CodyNo gateway (fixed)')).toBeInTheDocument();
     });
 
     it('pre-fills extensions from initial values', async () => {

@@ -13,12 +13,12 @@ import { defineMessages, useIntl } from '../i18n';
 const i18n = defineMessages({
   heading: {
     id: 'telemetryConsentPrompt.heading',
-    defaultMessage: 'Help improve goose',
+    defaultMessage: 'CodyNo telemetry is disabled',
   },
   description: {
     id: 'telemetryConsentPrompt.description',
     defaultMessage:
-      'Would you like to share anonymous usage data to help improve goose? We never collect your conversations, code, or personal data.',
+      'CodyNo does not collect anonymous usage data, conversations, code, or personal data.',
   },
   learnMore: {
     id: 'telemetryConsentPrompt.learnMore',
@@ -26,7 +26,7 @@ const i18n = defineMessages({
   },
   optIn: {
     id: 'telemetryConsentPrompt.optIn',
-    defaultMessage: 'Yes, share anonymous usage data',
+    defaultMessage: 'Continue',
   },
   optOut: {
     id: 'telemetryConsentPrompt.optOut',

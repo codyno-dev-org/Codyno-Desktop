@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useConfig } from '../ConfigContext';
 import { useModelAndProvider } from '../ModelAndProviderContext';
 import { acpListProviderDetails, acpReadDefaults, acpSaveDefaults } from '../../acp/providers';
-import { Goose } from '../icons';
+import { CodyNoMark } from '../icons';
 import { Button } from '../ui/button';
 import ProviderSelector from './ProviderSelector';
 import OnboardingSuccess from './OnboardingSuccess';
@@ -19,15 +19,15 @@ import { defineMessages, useIntl } from '../../i18n';
 const i18n = defineMessages({
   welcomeTitle: {
     id: 'onboardingGuard.welcomeTitle',
-    defaultMessage: 'Welcome to goose',
+    defaultMessage: 'Welcome to CodyNo',
   },
   welcomeDescription: {
     id: 'onboardingGuard.welcomeDescription',
-    defaultMessage: 'Your local AI agent. Connect an AI model provider to get started.',
+    defaultMessage: 'Your AI workspace. Sign in to CodyNo to get started.',
   },
   checkProviderErrorTitle: {
     id: 'onboardingGuard.checkProviderErrorTitle',
-    defaultMessage: 'Unable to connect to Goose server',
+    defaultMessage: 'Unable to connect to CodyNo',
   },
   checkProviderErrorDescription: {
     id: 'onboardingGuard.checkProviderErrorDescription',
@@ -49,7 +49,7 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
   const intl = useIntl();
   const navigate = useNavigate();
   const { upsert } = useConfig();
-  const { getFallbackModelAndProvider, refreshCurrentModelAndProvider } = useModelAndProvider();
+  const { refreshCurrentModelAndProvider } = useModelAndProvider();
 
   const [isCheckingProvider, setIsCheckingProvider] = useState(true);
   const [hasProvider, setHasProvider] = useState(false);
@@ -67,23 +67,12 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
     setCheckProviderError(false);
     for (let attempt = 0; attempt <= retries; attempt++) {
       try {
-        const { providerId: provider } = await acpReadDefaults();
-        if (provider?.trim()) {
+        const { providerId: provider, modelId: model } = await acpReadDefaults();
+        if (provider?.trim() && model?.trim()) {
+          await refreshCurrentModelAndProvider();
           setHasProvider(true);
           setIsCheckingProvider(false);
           return;
-        }
-
-        const fallback = await getFallbackModelAndProvider();
-        if (fallback.provider?.trim() && fallback.model?.trim()) {
-          const { providerId: configuredProvider, modelId: configuredModel } =
-            await acpReadDefaults();
-          if (configuredProvider?.trim() && configuredModel?.trim()) {
-            await refreshCurrentModelAndProvider();
-            setHasProvider(true);
-            setIsCheckingProvider(false);
-            return;
-          }
         }
 
         setHasProvider(false);
@@ -124,7 +113,8 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
     setConfiguredProviderDisplayName(matchedProvider?.metadata.display_name || providerName);
   };
 
-  const finishOnboarding = async (telemetryEnabled: boolean) => {
+  const finishOnboarding = async () => {
+    const telemetryEnabled = false;
     try {
       await upsert(TELEMETRY_CONFIG_KEY, telemetryEnabled, false);
     } catch (error) {
@@ -150,7 +140,7 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
       <div className="h-screen w-full bg-background-default flex flex-col items-center justify-center">
         <div className="text-center max-w-md">
           <div className="mb-4">
-            <Goose className="size-8 mx-auto" />
+            <CodyNoMark className="size-8 mx-auto" />
           </div>
           <h1 className="text-xl font-light mb-3">{intl.formatMessage(i18n.checkProviderErrorTitle)}</h1>
           <p className="text-text-muted mb-6">{intl.formatMessage(i18n.checkProviderErrorDescription)}</p>
@@ -183,7 +173,7 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
               className={`text-left transition-all duration-500 ease-in-out overflow-hidden ${hasSelection ? 'max-h-0 opacity-0 mb-0' : 'max-h-60 opacity-100 mb-8'}`}
             >
               <div className="mb-4">
-                <Goose className="size-8" />
+                <CodyNoMark className="size-8" />
               </div>
               <h1 className="text-2xl sm:text-4xl font-light mb-3">{intl.formatMessage(i18n.welcomeTitle)}</h1>
               <p className="text-text-muted text-base sm:text-lg">

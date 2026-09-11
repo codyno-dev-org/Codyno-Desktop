@@ -16,15 +16,15 @@ impl Paths {
                 DirType::AgentsHome => base.join(".agents"),
             }
         } else {
-            // NOTE: "Block" is kept here for backwards compatibility with existing
-            // user config/data directories (e.g. ~/Library/Application Support/Block/goose/).
-            // Changing this would orphan existing installations.
+            // CodyNo intentionally owns a separate config/data namespace. Do not
+            // fall back to Goose's directories: the CodyNo desktop app must not
+            // read or write an installed Goose instance's sessions or settings.
             let strategy = choose_app_strategy(AppStrategyArgs {
-                top_level_domain: "Block".to_string(),
-                author: "Block".to_string(),
-                app_name: "goose".to_string(),
+                top_level_domain: "CodyNo".to_string(),
+                author: "CodyNo".to_string(),
+                app_name: "codyno".to_string(),
             })
-            .expect("goose requires a home dir");
+            .expect("CodyNo requires a home dir");
 
             match dir_type {
                 DirType::Config => strategy.config_dir(),

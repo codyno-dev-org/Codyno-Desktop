@@ -1,0 +1,92 @@
+name: Build CodyNo for macOS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Package macOS ${{ matrix.arch }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-14
+          - arch: x64
+            runner: macos-15-intel
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: Check out CodyNo
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: ui/pnpm-lock.yaml
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.94.1
+
+      - name: Cache Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-${{ matrix.arch }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.arch }}-cargo-
+
+      - name: Install desktop dependencies
+        working-directory: ui
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CodyNo backend
+        run: cargo build --release -p goose-cli --bin goose --no-default-features --features portable-default
+
+      - name: Stage CodyNo backend
+        run: |
+          mkdir -p ui/desktop/src/bin
+          cp target/release/goose ui/desktop/src/bin/goose
+          chmod +x ui/desktop/src/bin/goose
+          file ui/desktop/src/bin/goose
+
+      - name: Build desktop assets
+        working-directory: ui/desktop
+        run: |
+          pnpm run build-goose-acp-client
+          pnpm run i18n:compile
+
+      - name: Package CodyNo
+        working-directory: ui/desktop
+        run: pnpm exec electron-forge make --platform=darwin --arch=${{ matrix.arch }} --targets=@electron-forge/maker-zip
+
+      - name: Create checksums
+        working-directory: ui/desktop
+        run: shasum -a 256 out/make/zip/darwin/${{ matrix.arch }}/*.zip > out/make/zip/darwin/${{ matrix.arch }}/SHA256SUMS.txt
+
+      - name: Upload CodyNo macOS package
+        uses: actions/upload-artifact@v4
+        with:
+          name: CodyNo-macos-${{ matrix.arch }}
+          path: ui/desktop/out/make/zip/darwin/${{ matrix.arch }}/
+          if-no-files-found: error
+          retention-days: 14

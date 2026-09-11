@@ -1296,10 +1296,10 @@
     "defaultMessage": "취소"
   },
   "importRecipeForm.deeplinkHint": {
-    "defaultMessage": "\"goose://recipe?config=\"로 시작하는 레시피 딥링크를 붙여넣으세요."
+    "defaultMessage": "\"codyno://recipe?config=\"로 시작하는 레시피 딥링크를 붙여넣으세요."
   },
   "importRecipeForm.deeplinkPlaceholder": {
-    "defaultMessage": "goose://recipe?config=... 딥링크를 여기에 붙여넣으세요."
+    "defaultMessage": "codyno://recipe?config=... 딥링크를 여기에 붙여넣으세요."
   },
   "importRecipeForm.example": {
     "defaultMessage": "예"
@@ -2261,9 +2261,6 @@
   "onboardingSuccess.privacyTitle": {
     "defaultMessage": "개인정보 보호"
   },
-  "onboardingSuccess.shareUsageData": {
-    "defaultMessage": "익명의 사용 데이터 공유"
-  },
   "parameterInput.defaultValue": {
     "defaultMessage": "기본값"
   },
@@ -2669,32 +2666,8 @@
   "providerLogo.alt": {
     "defaultMessage": "{providerName} 로고"
   },
-  "providerSelector.connectProvider": {
-    "defaultMessage": "제공업체에 연결"
-  },
-  "providerSelector.connectProviderDescription": {
-    "defaultMessage": "OpenAI, Anthropic, Google 등을 연결합니다."
-  },
-  "providerSelector.localModelDescription": {
-    "defaultMessage": "모델을 다운로드하여 이 기기에서 실행하세요. API 키나 계정이 필요하지 않습니다."
-  },
-  "providerSelector.selectProvider": {
-    "defaultMessage": "제공업체 선택"
-  },
-  "providerSelector.useLocalModel": {
-    "defaultMessage": "로컬 모델 사용"
-  },
-  "providerSettings.configurationSettings": {
-    "defaultMessage": "제공업체 구성 설정"
-  },
-  "providerSettings.loadingProviders": {
-    "defaultMessage": "제공업체 로드 중..."
-  },
   "providerSettings.onboardingDescription": {
     "defaultMessage": "goose를 시작하려면 AI 모델 제공업체를 선택하세요. 각 제공업체가 생성한 API 키를 사용해야 하며 암호화되어 로컬에 저장됩니다. 설정에서 언제든지 제공업체를 변경할 수 있습니다."
-  },
-  "providerSettings.otherProviders": {
-    "defaultMessage": "기타 제공업체"
   },
   "providerSetupActions.cancel": {
     "defaultMessage": "취소"
@@ -3264,7 +3237,7 @@
     "defaultMessage": "딥링크"
   },
   "scheduleModal.deepLinkPlaceholder": {
-    "defaultMessage": "goose://recipe 링크를 여기에 붙여넣으세요..."
+    "defaultMessage": "codyno://recipe 링크를 여기에 붙여넣으세요..."
   },
   "scheduleModal.editSchedule": {
     "defaultMessage": "일정 편집"
@@ -3279,7 +3252,7 @@
     "defaultMessage": "선택한 파일을 읽지 못했습니다."
   },
   "scheduleModal.invalidDeepLink": {
-    "defaultMessage": "딥링크가 잘못되었습니다. goose://recipe 링크를 이용해 주세요."
+    "defaultMessage": "딥링크가 잘못되었습니다. codyno://recipe 링크를 이용해 주세요."
   },
   "scheduleModal.invalidFileType": {
     "defaultMessage": "잘못된 파일 형식: YAML 파일(.yaml 또는 .yml)을 선택하세요."
@@ -3663,7 +3636,7 @@
     "defaultMessage": "goose Nostr 공유 링크를 붙여넣어 세션을 가져오고 복호화한 뒤 불러오세요."
   },
   "sessions.importNostr.placeholder": {
-    "defaultMessage": "goose://sessions/nostr?nevent=...&key=..."
+    "defaultMessage": "codyno://sessions/nostr?nevent=...&key=..."
   },
   "sessions.importNostr.title": {
     "defaultMessage": "Nostr 세션 가져오기"
@@ -4331,9 +4304,6 @@
   "toolConfirmation.allowToolCallWithName": {
     "defaultMessage": "{toolName}을 허용하시겠습니까?"
   },
-  "toolConfirmation.gooseWouldLikeToCallWithName": {
-    "defaultMessage": "goose가 {toolName}을 호출하려고 합니다. 허용하시겠습니까?"
-  },
   "updateSection.autoDownload": {
     "defaultMessage": "goose가 백그라운드에서 업데이트를 다운로드하며, 종료하거나 다시 시작할 때 설치합니다."
   },
@@ -4489,5 +4459,59 @@
   },
   "providerConfigurationModal.deviceCodeVisit": {
     "defaultMessage": "방문하여"
+  },
+  "providerSelector.codeLabel": {
+    "defaultMessage": "Your sign-in code"
+  },
+  "providerSelector.connected": {
+    "defaultMessage": "Connected to CodyNo"
+  },
+  "providerSelector.connectedDescription": {
+    "defaultMessage": "Your CodyNo account is connected. Requests use the CodyNo gateway."
+  },
+  "providerSelector.denied": {
+    "defaultMessage": "This sign-in request was denied. Start again when you are ready."
+  },
+  "providerSelector.description": {
+    "defaultMessage": "Sign in with your CodyNo account. Your requests will be routed through the CodyNo AI gateway."
+  },
+  "providerSelector.error": {
+    "defaultMessage": "CodyNo sign-in could not be completed. Please try again."
+  },
+  "providerSelector.expired": {
+    "defaultMessage": "This sign-in code expired. Start again to get a new code."
+  },
+  "providerSelector.openBrowser": {
+    "defaultMessage": "Open CodyNo in browser"
+  },
+  "providerSelector.retry": {
+    "defaultMessage": "Try again"
+  },
+  "providerSelector.signIn": {
+    "defaultMessage": "Sign in with CodyNo"
+  },
+  "providerSelector.signingIn": {
+    "defaultMessage": "Starting CodyNo sign-in…"
+  },
+  "providerSelector.title": {
+    "defaultMessage": "Sign in to CodyNo"
+  },
+  "providerSelector.waiting": {
+    "defaultMessage": "Finish signing in in your browser. CodyNo will connect automatically when you approve this device."
+  },
+  "providerSettings.connected": {
+    "defaultMessage": "CodyNo is connected"
+  },
+  "providerSettings.onboardingTitle": {
+    "defaultMessage": "Connect CodyNo"
+  },
+  "providerSettings.settingsDescription": {
+    "defaultMessage": "Manage the CodyNo account used by this desktop app. All model requests go through CodyNo."
+  },
+  "providerSettings.settingsTitle": {
+    "defaultMessage": "CodyNo account"
+  },
+  "toolConfirmation.codynoWouldLikeToCallWithName": {
+    "defaultMessage": "CodyNo would like to call {toolName}. Allow?"
   }
 }

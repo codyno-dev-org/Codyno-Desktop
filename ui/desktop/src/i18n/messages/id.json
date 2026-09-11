@@ -1296,10 +1296,10 @@
     "defaultMessage": "Batal"
   },
   "importRecipeForm.deeplinkHint": {
-    "defaultMessage": "Tempelkan deeplink resep yang dimulai dengan \"goose://recipe?config=\""
+    "defaultMessage": "Tempelkan deeplink resep yang dimulai dengan \"codyno://recipe?config=\""
   },
   "importRecipeForm.deeplinkPlaceholder": {
-    "defaultMessage": "Tempelkan deeplink goose://recipe?config=... Anda di sini"
+    "defaultMessage": "Tempelkan deeplink codyno://recipe?config=... Anda di sini"
   },
   "importRecipeForm.example": {
     "defaultMessage": "contoh"
@@ -2261,9 +2261,6 @@
   "onboardingSuccess.privacyTitle": {
     "defaultMessage": "Privasi"
   },
-  "onboardingSuccess.shareUsageData": {
-    "defaultMessage": "Bagikan data penggunaan anonim"
-  },
   "parameterInput.defaultValue": {
     "defaultMessage": "Nilai Default"
   },
@@ -2669,32 +2666,8 @@
   "providerLogo.alt": {
     "defaultMessage": "Logo {providerName}"
   },
-  "providerSelector.connectProvider": {
-    "defaultMessage": "Hubungkan ke Penyedia"
-  },
-  "providerSelector.connectProviderDescription": {
-    "defaultMessage": "Hubungkan OpenAI, Anthropic, Google, dll"
-  },
-  "providerSelector.localModelDescription": {
-    "defaultMessage": "Unduh model dan jalankan sepenuhnya di mesin Anda. Tanpa kunci API, tanpa akun."
-  },
-  "providerSelector.selectProvider": {
-    "defaultMessage": "Pilih penyedia"
-  },
-  "providerSelector.useLocalModel": {
-    "defaultMessage": "Gunakan Model Lokal"
-  },
-  "providerSettings.configurationSettings": {
-    "defaultMessage": "Pengaturan Konfigurasi Penyedia"
-  },
-  "providerSettings.loadingProviders": {
-    "defaultMessage": "Memuat penyedia..."
-  },
   "providerSettings.onboardingDescription": {
     "defaultMessage": "Pilih penyedia model AI untuk memulai dengan goose. Anda perlu menggunakan kunci API yang dihasilkan oleh setiap penyedia yang akan dienkripsi dan disimpan secara lokal. Anda dapat mengubah penyedia kapan saja di pengaturan."
-  },
-  "providerSettings.otherProviders": {
-    "defaultMessage": "Penyedia lain"
   },
   "providerSetupActions.cancel": {
     "defaultMessage": "Batal"
@@ -3264,7 +3237,7 @@
     "defaultMessage": "Tautan dalam"
   },
   "scheduleModal.deepLinkPlaceholder": {
-    "defaultMessage": "Tempel tautan goose://recipe di sini..."
+    "defaultMessage": "Tempel tautan codyno://recipe di sini..."
   },
   "scheduleModal.editSchedule": {
     "defaultMessage": "Edit Jadwal"
@@ -3279,7 +3252,7 @@
     "defaultMessage": "Gagal membaca berkas yang dipilih."
   },
   "scheduleModal.invalidDeepLink": {
-    "defaultMessage": "Tautan dalam tidak valid. Harap gunakan tautan goose://recipe."
+    "defaultMessage": "Tautan dalam tidak valid. Harap gunakan tautan codyno://recipe."
   },
   "scheduleModal.invalidFileType": {
     "defaultMessage": "Jenis berkas tidak valid: Harap pilih berkas YAML (.yaml atau .yml)"
@@ -3663,7 +3636,7 @@
     "defaultMessage": "Tempel tautan berbagi Nostr Goose untuk mengambil, mendekripsi, dan mengimpor sesi."
   },
   "sessions.importNostr.placeholder": {
-    "defaultMessage": "goose://sessions/nostr?nevent=...&key=..."
+    "defaultMessage": "codyno://sessions/nostr?nevent=...&key=..."
   },
   "sessions.importNostr.title": {
     "defaultMessage": "Impor Sesi Nostr"
@@ -4331,9 +4304,6 @@
   "toolConfirmation.allowToolCallWithName": {
     "defaultMessage": "Izinkan {toolName}?"
   },
-  "toolConfirmation.gooseWouldLikeToCallWithName": {
-    "defaultMessage": "Goose ingin memanggil {toolName}. Izinkan?"
-  },
   "updateSection.autoDownload": {
     "defaultMessage": "Goose akan mengunduh pembaruan di latar belakang dan menginstalnya saat Anda keluar atau memulai ulang berikutnya."
   },
@@ -4489,5 +4459,59 @@
   },
   "providerConfigurationModal.deviceCodeVisit": {
     "defaultMessage": "Kunjungi"
+  },
+  "providerSelector.codeLabel": {
+    "defaultMessage": "Your sign-in code"
+  },
+  "providerSelector.connected": {
+    "defaultMessage": "Connected to CodyNo"
+  },
+  "providerSelector.connectedDescription": {
+    "defaultMessage": "Your CodyNo account is connected. Requests use the CodyNo gateway."
+  },
+  "providerSelector.denied": {
+    "defaultMessage": "This sign-in request was denied. Start again when you are ready."
+  },
+  "providerSelector.description": {
+    "defaultMessage": "Sign in with your CodyNo account. Your requests will be routed through the CodyNo AI gateway."
+  },
+  "providerSelector.error": {
+    "defaultMessage": "CodyNo sign-in could not be completed. Please try again."
+  },
+  "providerSelector.expired": {
+    "defaultMessage": "This sign-in code expired. Start again to get a new code."
+  },
+  "providerSelector.openBrowser": {
+    "defaultMessage": "Open CodyNo in browser"
+  },
+  "providerSelector.retry": {
+    "defaultMessage": "Try again"
+  },
+  "providerSelector.signIn": {
+    "defaultMessage": "Sign in with CodyNo"
+  },
+  "providerSelector.signingIn": {
+    "defaultMessage": "Starting CodyNo sign-in…"
+  },
+  "providerSelector.title": {
+    "defaultMessage": "Sign in to CodyNo"
+  },
+  "providerSelector.waiting": {
+    "defaultMessage": "Finish signing in in your browser. CodyNo will connect automatically when you approve this device."
+  },
+  "providerSettings.connected": {
+    "defaultMessage": "CodyNo is connected"
+  },
+  "providerSettings.onboardingTitle": {
+    "defaultMessage": "Connect CodyNo"
+  },
+  "providerSettings.settingsDescription": {
+    "defaultMessage": "Manage the CodyNo account used by this desktop app. All model requests go through CodyNo."
+  },
+  "providerSettings.settingsTitle": {
+    "defaultMessage": "CodyNo account"
+  },
+  "toolConfirmation.codynoWouldLikeToCallWithName": {
+    "defaultMessage": "CodyNo would like to call {toolName}. Allow?"
   }
 }

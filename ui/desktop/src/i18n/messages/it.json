@@ -1296,10 +1296,10 @@
     "defaultMessage": "Annulla"
   },
   "importRecipeForm.deeplinkHint": {
-    "defaultMessage": "Incolla un deeplink di ricetta che inizia con \"goose://recipe?config=\""
+    "defaultMessage": "Incolla un deeplink di ricetta che inizia con \"codyno://recipe?config=\""
   },
   "importRecipeForm.deeplinkPlaceholder": {
-    "defaultMessage": "Incolla qui il tuo deeplink goose://recipe?config=..."
+    "defaultMessage": "Incolla qui il tuo deeplink codyno://recipe?config=..."
   },
   "importRecipeForm.example": {
     "defaultMessage": "esempio"
@@ -2261,9 +2261,6 @@
   "onboardingSuccess.privacyTitle": {
     "defaultMessage": "Privacy"
   },
-  "onboardingSuccess.shareUsageData": {
-    "defaultMessage": "Condividi dati di utilizzo anonimi"
-  },
   "parameterInput.defaultValue": {
     "defaultMessage": "Valore predefinito"
   },
@@ -2669,32 +2666,8 @@
   "providerLogo.alt": {
     "defaultMessage": "Logo {providerName}"
   },
-  "providerSelector.connectProvider": {
-    "defaultMessage": "Connetti a un provider"
-  },
-  "providerSelector.connectProviderDescription": {
-    "defaultMessage": "Connetti OpenAI, Anthropic, Google, ecc."
-  },
-  "providerSelector.localModelDescription": {
-    "defaultMessage": "Scarica un modello ed eseguilo interamente sul tuo computer. Niente chiavi API, niente account."
-  },
-  "providerSelector.selectProvider": {
-    "defaultMessage": "Seleziona un provider"
-  },
-  "providerSelector.useLocalModel": {
-    "defaultMessage": "Usa un modello locale"
-  },
-  "providerSettings.configurationSettings": {
-    "defaultMessage": "Impostazioni di configurazione del provider"
-  },
-  "providerSettings.loadingProviders": {
-    "defaultMessage": "Caricamento provider..."
-  },
   "providerSettings.onboardingDescription": {
     "defaultMessage": "Seleziona un provider di modelli IA per iniziare con goose. Dovrai usare le chiavi API generate da ciascun provider, che verranno crittografate e archiviate localmente. Puoi cambiare provider in qualsiasi momento nelle impostazioni."
-  },
-  "providerSettings.otherProviders": {
-    "defaultMessage": "Altri provider"
   },
   "providerSetupActions.cancel": {
     "defaultMessage": "Annulla"
@@ -3264,7 +3237,7 @@
     "defaultMessage": "Deep link"
   },
   "scheduleModal.deepLinkPlaceholder": {
-    "defaultMessage": "Incolla qui il link goose://recipe..."
+    "defaultMessage": "Incolla qui il link codyno://recipe..."
   },
   "scheduleModal.editSchedule": {
     "defaultMessage": "Modifica pianificazione"
@@ -3279,7 +3252,7 @@
     "defaultMessage": "Impossibile leggere il file selezionato."
   },
   "scheduleModal.invalidDeepLink": {
-    "defaultMessage": "Deep link non valido. Usa un link goose://recipe."
+    "defaultMessage": "Deep link non valido. Usa un link codyno://recipe."
   },
   "scheduleModal.invalidFileType": {
     "defaultMessage": "Tipo di file non valido: seleziona un file YAML (.yaml o .yml)"
@@ -3663,7 +3636,7 @@
     "defaultMessage": "Incolla un link di condivisione Nostr di Goose per recuperare, decrittografare e importare la sessione."
   },
   "sessions.importNostr.placeholder": {
-    "defaultMessage": "goose://sessions/nostr?nevent=...&key=..."
+    "defaultMessage": "codyno://sessions/nostr?nevent=...&key=..."
   },
   "sessions.importNostr.title": {
     "defaultMessage": "Importa sessione Nostr"
@@ -4331,9 +4304,6 @@
   "toolConfirmation.allowToolCallWithName": {
     "defaultMessage": "Consentire {toolName}?"
   },
-  "toolConfirmation.gooseWouldLikeToCallWithName": {
-    "defaultMessage": "Goose desidera richiamare {toolName}. Consentire?"
-  },
   "updateSection.autoDownload": {
     "defaultMessage": "Goose scaricherà l'aggiornamento in background e lo installerà al prossimo arresto o riavvio."
   },
@@ -4489,5 +4459,59 @@
   },
   "providerConfigurationModal.deviceCodeVisit": {
     "defaultMessage": "Visita"
+  },
+  "providerSelector.codeLabel": {
+    "defaultMessage": "Your sign-in code"
+  },
+  "providerSelector.connected": {
+    "defaultMessage": "Connected to CodyNo"
+  },
+  "providerSelector.connectedDescription": {
+    "defaultMessage": "Your CodyNo account is connected. Requests use the CodyNo gateway."
+  },
+  "providerSelector.denied": {
+    "defaultMessage": "This sign-in request was denied. Start again when you are ready."
+  },
+  "providerSelector.description": {
+    "defaultMessage": "Sign in with your CodyNo account. Your requests will be routed through the CodyNo AI gateway."
+  },
+  "providerSelector.error": {
+    "defaultMessage": "CodyNo sign-in could not be completed. Please try again."
+  },
+  "providerSelector.expired": {
+    "defaultMessage": "This sign-in code expired. Start again to get a new code."
+  },
+  "providerSelector.openBrowser": {
+    "defaultMessage": "Open CodyNo in browser"
+  },
+  "providerSelector.retry": {
+    "defaultMessage": "Try again"
+  },
+  "providerSelector.signIn": {
+    "defaultMessage": "Sign in with CodyNo"
+  },
+  "providerSelector.signingIn": {
+    "defaultMessage": "Starting CodyNo sign-in…"
+  },
+  "providerSelector.title": {
+    "defaultMessage": "Sign in to CodyNo"
+  },
+  "providerSelector.waiting": {
+    "defaultMessage": "Finish signing in in your browser. CodyNo will connect automatically when you approve this device."
+  },
+  "providerSettings.connected": {
+    "defaultMessage": "CodyNo is connected"
+  },
+  "providerSettings.onboardingTitle": {
+    "defaultMessage": "Connect CodyNo"
+  },
+  "providerSettings.settingsDescription": {
+    "defaultMessage": "Manage the CodyNo account used by this desktop app. All model requests go through CodyNo."
+  },
+  "providerSettings.settingsTitle": {
+    "defaultMessage": "CodyNo account"
+  },
+  "toolConfirmation.codynoWouldLikeToCallWithName": {
+    "defaultMessage": "CodyNo would like to call {toolName}. Allow?"
   }
 }

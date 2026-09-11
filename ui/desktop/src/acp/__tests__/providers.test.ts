@@ -38,19 +38,19 @@ describe('ACP providers', () => {
             .fn()
             .mockResolvedValueOnce({
               configOptions: [
-                selectConfigOption('provider', 'anthropic'),
+                selectConfigOption('provider', 'litellm'),
                 selectConfigOption('model', 'provider-default-model'),
               ],
             })
             .mockResolvedValueOnce({
               configOptions: [
-                selectConfigOption('provider', 'anthropic'),
+                selectConfigOption('provider', 'litellm'),
                 selectConfigOption('model', 'claude-sonnet-4-5'),
               ],
             })
             .mockResolvedValueOnce({
               configOptions: [
-                selectConfigOption('provider', 'anthropic'),
+                selectConfigOption('provider', 'litellm'),
                 selectConfigOption('model', 'claude-sonnet-4-5'),
                 selectConfigOption('thinking_effort', 'high'),
               ],
@@ -64,7 +64,7 @@ describe('ACP providers', () => {
 
     const applied = await acpSetSessionProviderModel(
       'session-1',
-      'anthropic',
+      'litellm',
       'claude-sonnet-4-5',
       'high'
     );
@@ -76,7 +76,7 @@ describe('ACP providers', () => {
       {
         sessionId: 'session-1',
         configId: 'provider',
-        value: 'anthropic',
+        value: 'litellm',
       }
     );
     expect(client.connection.agent.request).toHaveBeenNthCalledWith(
@@ -98,7 +98,7 @@ describe('ACP providers', () => {
       }
     );
     expect(applied).toEqual({
-      providerId: 'anthropic',
+      providerId: 'litellm',
       modelId: 'claude-sonnet-4-5',
     });
   });

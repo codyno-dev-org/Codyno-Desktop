@@ -2421,7 +2421,7 @@ fn prompt_tool_confirmation(request: &ToolConfirmationRequest) -> Result<Permiss
     let prompt = if request.prompt.is_some() {
         "Do you allow this tool call?".to_string()
     } else {
-        "Goose would like to call the above tool, do you allow?".to_string()
+        "CodyNo would like to call the above tool, do you allow?".to_string()
     };
 
     let permission_result = if request.prompt.is_none() {

@@ -99,7 +99,6 @@ export default function ModelsBottomBar({
   const pendingModalRef = useRef<ModelMenuModal | null>(null);
   const [isAddModelModalOpen, setIsAddModelModalOpen] = useState(false);
   const [isLocalModelSettingsOpen, setIsLocalModelSettingsOpen] = useState(false);
-  const [providerDefaultModel, setProviderDefaultModel] = useState<string | null>(null);
   const [recentModels, setRecentModels] = useState<RecentModel[]>([]);
 
   const loadRecentModels = useCallback(async () => {
@@ -114,7 +113,7 @@ export default function ModelsBottomBar({
   // Show a visible loading placeholder while session metadata is still being fetched,
   // rather than flashing the config default or leaving the footer blank.
   const isModelLoading = Boolean(sessionId && !sessionLoaded);
-  const displayModel = currentModel || providerDefaultModel || displayModelName;
+  const displayModel = currentModel || displayModelName;
   const resolvedModel = latestInference?.resolvedModel ?? null;
   const shouldShowResolvedModel = Boolean(
     !isModelLoading &&
@@ -136,23 +135,6 @@ export default function ModelsBottomBar({
       .catch(() => {
         setDisplayProvider(currentProvider);
       });
-  }, [currentProvider, currentModel]);
-
-  // Fetch provider default model when provider changes and no current model
-  useEffect(() => {
-    if (currentProvider && !currentModel) {
-      (async () => {
-        try {
-          const metadata = await getProviderMetadata(currentProvider);
-          setProviderDefaultModel(metadata.default_model);
-        } catch (error) {
-          console.error('Failed to get provider default model:', error);
-          setProviderDefaultModel(null);
-        }
-      })();
-    } else if (currentModel) {
-      setProviderDefaultModel(null);
-    }
   }, [currentProvider, currentModel]);
 
   useEffect(() => {
@@ -216,7 +198,7 @@ export default function ModelsBottomBar({
   };
 
   const filteredRecentModels = recentModels.filter(
-    (r) => !(r.model === currentModel && r.provider === currentProvider)
+    (r) => r.provider === 'litellm' && !(r.model === currentModel && r.provider === currentProvider)
   );
 
   return (

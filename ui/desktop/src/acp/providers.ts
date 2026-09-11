@@ -15,6 +15,15 @@ import { getAcpClient } from './acpConnection';
 
 export type { CanonicalModelInfoDto, ProviderSecretDto };
 
+export const CODYNO_PROVIDER_ID = 'litellm';
+const CODYNO_LEGACY_DEFAULT_MODEL = 'gpt-4o-mini';
+
+function assertCodyNoProvider(providerId: string): void {
+  if (providerId !== CODYNO_PROVIDER_ID) {
+    throw new Error('CodyNo only supports the CodyNo gateway provider');
+  }
+}
+
 const INVENTORY_REFRESH_POLL_INTERVAL_MS = 100;
 const INVENTORY_REFRESH_TIMEOUT_MS = 30_000;
 
@@ -181,8 +190,51 @@ export async function acpRefreshProviderDetails(
   };
 }
 
+/**
+ * Resolve a CodyNo model from the gateway inventory.
+ *
+ * The upstream LiteLLM metadata used to contain a generic OpenAI fallback.
+ * CodyNo models are account-specific, so that value must never become the
+ * desktop default. Refresh the authenticated inventory whenever the saved
+ * model is missing or is the old fallback, then persist the first model in
+ * the gateway's catalog order.
+ */
+export async function acpResolveCodyNoModel(currentModel?: string | null): Promise<string> {
+  const candidate = currentModel?.trim() || null;
+  const liveModels = await acpListProviderModels(CODYNO_PROVIDER_ID);
+  const modelIds = liveModels.map((model) => model.id);
+  const hasCandidate = candidate != null && modelIds.includes(candidate);
+  const isLegacyDefault = candidate === CODYNO_LEGACY_DEFAULT_MODEL;
+
+  if (candidate && hasCandidate && !isLegacyDefault) {
+    return candidate;
+  }
+
+  const resolvedModel =
+    (candidate && modelIds.includes(candidate) ? candidate : modelIds[0]) ?? null;
+
+  if (!resolvedModel) {
+    throw new Error('CodyNo did not return any available models for this account');
+  }
+
+  if (resolvedModel !== candidate) {
+    await acpSaveDefaults(CODYNO_PROVIDER_ID, resolvedModel);
+  }
+
+  return resolvedModel;
+}
+
 export async function acpListProviderModels(providerId: string) {
   const client = await getAcpClient();
+  if (providerId === CODYNO_PROVIDER_ID) {
+    const { models } = await client.goose.providersSupportedModelsList_unstable({ providerId });
+    return models.map((id) => ({
+      id,
+      name: id,
+      contextLimit: undefined,
+      reasoning: undefined,
+    }));
+  }
   const { entries } = await client.goose.providersList_unstable({ providerIds: [providerId] });
   return entries.find((e) => e.providerId === providerId)?.models ?? [];
 }
@@ -216,6 +268,7 @@ export async function acpSaveProviderConfig(
   providerId: string,
   fields: { key: string; value: string }[]
 ): Promise<void> {
+  assertCodyNoProvider(providerId);
   const client = await getAcpClient();
   await client.goose.providersConfigSave_unstable({ providerId, fields });
 }
@@ -268,13 +321,28 @@ export async function acpReadDefaults(): Promise<{
 }> {
   const client = await getAcpClient();
   const response = await client.goose.defaultsRead_unstable({});
+  const providerId = response.providerId === CODYNO_PROVIDER_ID ? response.providerId : null;
+  let modelId = providerId ? response.modelId ?? null : null;
+
+  if (providerId && (!modelId || modelId === CODYNO_LEGACY_DEFAULT_MODEL)) {
+    try {
+      modelId = await acpResolveCodyNoModel(modelId);
+    } catch (error) {
+      // Do not surface a stale generic model while the gateway catalog is
+      // unavailable. The UI will show its normal model-selection state.
+      console.warn('Unable to resolve a CodyNo model from the gateway:', error);
+      modelId = null;
+    }
+  }
+
   return {
-    providerId: response.providerId ?? null,
-    modelId: response.modelId ?? null,
+    providerId,
+    modelId,
   };
 }
 
 export async function acpSaveDefaults(providerId: string, modelId?: string | null): Promise<void> {
+  assertCodyNoProvider(providerId);
   const client = await getAcpClient();
   await client.goose.defaultsSave_unstable({ providerId, modelId: modelId ?? null });
 }
@@ -359,6 +427,7 @@ export async function acpSetSessionProviderModel(
   modelId?: string | null,
   thinkingEffort?: ThinkingEffort | null
 ): Promise<AppliedSessionProviderModel> {
+  assertCodyNoProvider(providerId);
   const client = await getAcpClient();
   let response = await client.connection.agent.request(methods.agent.session.setConfigOption, {
     sessionId,

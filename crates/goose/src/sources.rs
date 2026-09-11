@@ -1818,12 +1818,12 @@ mod tests {
         let listed = list_sources(Some(SourceType::BuiltinSkill), None, false).unwrap();
         let builtin = listed
             .iter()
-            .find(|source| source.name == "goose-doc-guide")
-            .expect("expected goose-doc-guide builtin skill");
+            .find(|source| source.name == "codyno-doc-guide")
+            .expect("expected codyno-doc-guide builtin skill");
 
         assert_eq!(builtin.source_type, SourceType::BuiltinSkill);
         assert!(builtin.global);
-        assert_eq!(builtin.path, "builtin://skills/goose-doc-guide");
+        assert_eq!(builtin.path, "builtin://skills/codyno-doc-guide");
         assert!(builtin.supporting_files.is_empty());
         assert!(!builtin.content.is_empty());
     }
@@ -1843,12 +1843,12 @@ mod tests {
         let skill_dir = project
             .join(".agents")
             .join("skills")
-            .join("goose-doc-guide");
+            .join("codyno-doc-guide");
         std::fs::create_dir_all(&skill_dir).unwrap();
         std::fs::write(
             skill_dir.join("SKILL.md"),
             build_skill_md(
-                "goose-doc-guide",
+                "codyno-doc-guide",
                 "project override",
                 "Use project docs",
                 &HashMap::new(),
@@ -1864,7 +1864,7 @@ mod tests {
         .unwrap();
         assert!(!builtins
             .iter()
-            .any(|source| source.name == "goose-doc-guide"));
+            .any(|source| source.name == "codyno-doc-guide"));
 
         let skills = list_sources(
             Some(SourceType::Skill),
@@ -1874,7 +1874,7 @@ mod tests {
         .unwrap();
         let project_skill = skills
             .iter()
-            .find(|source| source.name == "goose-doc-guide")
+            .find(|source| source.name == "codyno-doc-guide")
             .expect("expected project skill");
         assert_eq!(project_skill.source_type, SourceType::Skill);
         assert_eq!(project_skill.description, "project override");

@@ -11,6 +11,7 @@ import Check from './Check';
 import Close from './Close';
 import { CodeXml } from './CodeXml';
 import { Cog } from './Cog';
+import { CodyNoMark } from './CodyNo';
 import Copy from './Copy';
 import { Fuel } from './Fuel';
 import { GalleryHorizontalEnd } from './GalleryHorizontalEnd';
@@ -18,7 +19,6 @@ import { Gavel } from './Gavel';
 import { GlassWater } from './GlassWater';
 import { Grape } from './Grape';
 import { Gear } from './Gear';
-import { Goose } from './Goose';
 import { Microphone } from './Microphone';
 import { Watch0 } from './Watch0';
 import { Watch1 } from './Watch1';
@@ -42,6 +42,7 @@ export {
   Close,
   CodeXml,
   Cog,
+  CodyNoMark,
   Copy,
   Fuel,
   GalleryHorizontalEnd,
@@ -57,5 +58,4 @@ export {
   Watch4,
   Watch5,
   Watch6,
-  Goose,
 };

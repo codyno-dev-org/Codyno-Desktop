@@ -32,7 +32,7 @@ import {
 } from '../types/message';
 import { substituteParameters } from '../utils/parameterSubstitution';
 import { useAutoSubmit } from '../hooks/useAutoSubmit';
-import { Goose } from './icons';
+import { CodyNoMark } from './icons';
 import EnvironmentBadge from './GooseSidebar/EnvironmentBadge';
 import SessionActionsHeader from './SessionActionsHeader';
 import { isAcpRecovering, subscribeToAcpRecovery } from '../acp/acpConnection';
@@ -154,7 +154,7 @@ export default function BaseChat({
   }, [initialMessage, recipe?.prompt, session?.user_recipe_values]);
 
   // noAutoSubmit only suppresses auto-submitting the initial prompt of a fresh session
-  // (goose://new-session?prompt=...). Once the conversation has messages, later flows
+  // (codyno://new-session?prompt=...). Once the conversation has messages, later flows
   // such as forks or resumes should auto-submit normally.
   const suppressInitialAutoSubmit = noAutoSubmit && messages.length === 0;
   const canAutoSubmit =
@@ -427,14 +427,14 @@ export default function BaseChat({
           {/* Goose watermark - top right */}
           <div className="absolute top-[14px] right-4 z-[60] flex flex-row items-center gap-1">
             <a
-              href="https://goose-docs.ai"
+              href="https://codyno.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="no-drag flex flex-row items-center gap-1 hover:opacity-80 transition-opacity"
             >
-              <Goose className="size-5 goose-icon-animation" />
+              <CodyNoMark className="size-5 goose-icon-animation" />
               <span className="text-sm leading-none text-text-secondary -translate-y-px">
-                goose
+                CodyNo
               </span>
             </a>
             <EnvironmentBadge className="translate-y-px" />

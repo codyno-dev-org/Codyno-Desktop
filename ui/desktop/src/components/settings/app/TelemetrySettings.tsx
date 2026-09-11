@@ -26,7 +26,7 @@ const i18n = defineMessages({
   },
   toggleDescription: {
     id: 'telemetrySettings.toggleDescription',
-    defaultMessage: 'Help improve goose by sharing anonymous usage statistics.',
+    defaultMessage: 'CodyNo telemetry is disabled.',
   },
   learnMore: {
     id: 'telemetrySettings.learnMore',

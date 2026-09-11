@@ -67,6 +67,8 @@ import {
   readSelectedRecipe,
 } from './desktopFileAccess';
 
+const CODYNO_DEVICE_AUTH_URL = 'https://codyno.dev/api/device-auth/codes';
+
 function shouldSetupUpdater(): boolean {
   // Do not let an environment variable re-enable a third-party updater. The
   // flag is the single authority until CodyNo has its own release feed.
@@ -95,7 +97,7 @@ const MENU_TRANSLATIONS_ZH_CN: Record<string, string> = {
   Cut: '剪切',
   Copy: '复制',
   Paste: '粘贴',
-  // Goose-added items
+  // CodyNo-added items
   'New Window': '新建窗口',
   Settings: '设置',
   'Find…': '查找…',
@@ -107,11 +109,11 @@ const MENU_TRANSLATIONS_ZH_CN: Record<string, string> = {
   'New Chat Window': '新建聊天窗口',
   'Open Directory...': '打开目录…',
   'Recent Directories': '最近的目录',
-  'Focus Goose Window': '聚焦 Goose 窗口',
+  'Focus CodyNo Window': '聚焦 CodyNo 窗口',
   'Quick Launcher': '快速启动器',
   'Always on Top': '窗口置顶',
   'Toggle Navigation': '切换导航',
-  'About Goose': '关于 Goose',
+  'About CodyNo': '关于 CodyNo',
   // Electron's default role-based labels we want to translate as well.
   // (The menu role itself still provides the correct behaviour; only the
   // display string is overridden.)
@@ -137,7 +139,7 @@ const MENU_TRANSLATIONS_ZH_CN: Record<string, string> = {
   'Bring All to Front': '全部置于最前',
   'Emoji & Symbols': '表情符号',
   'Start Dictation…': '开始听写…',
-  'Hide Goose': '隐藏 Goose',
+  'Hide CodyNo': '隐藏 CodyNo',
   'Hide Others': '隐藏其他',
   'Show All': '全部显示',
   Services: '服务',
@@ -412,13 +414,13 @@ if (process.env.ENABLE_PLAYWRIGHT) {
 // In production, register normally
 if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
   // Development mode - force registration
-  console.log('[Main] Development mode: Forcing protocol registration for goose://');
-  app.setAsDefaultProtocolClient('goose');
+  console.log('[Main] Development mode: Forcing protocol registration for codyno://');
+  app.setAsDefaultProtocolClient('codyno');
 
   if (process.platform === 'darwin') {
     try {
       // Reset the default handler to ensure dev version takes precedence
-      spawn('open', ['-a', process.execPath, '--args', '--reset-protocol-handler', 'goose'], {
+      spawn('open', ['-a', process.execPath, '--args', '--reset-protocol-handler', 'codyno'], {
         detached: true,
         stdio: 'ignore',
       });
@@ -428,7 +430,7 @@ if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
   }
 } else {
   // Production mode - normal registration
-  app.setAsDefaultProtocolClient('goose');
+  app.setAsDefaultProtocolClient('codyno');
 }
 
 // Apply single instance lock on Windows and Linux where it's needed for deep links
@@ -442,7 +444,7 @@ if (process.platform !== 'darwin') {
     app.quit();
   } else {
     app.on('second-instance', (_event, commandLine) => {
-      const protocolUrl = commandLine.find((arg) => arg.startsWith('goose://'));
+      const protocolUrl = commandLine.find((arg) => arg.startsWith('codyno://'));
       if (protocolUrl) {
         const parsedUrl = new URL(protocolUrl);
         // If it's a bot/recipe URL, handle it directly by creating a new window
@@ -511,7 +513,7 @@ if (process.platform !== 'darwin') {
   }
 
   // Handle protocol URLs on Windows and Linux startup
-  const protocolUrl = process.argv.find((arg) => arg.startsWith('goose://'));
+  const protocolUrl = process.argv.find((arg) => arg.startsWith('codyno://'));
   if (protocolUrl) {
     app.whenReady().then(async () => {
       let parsedUrl: URL;
@@ -609,7 +611,7 @@ function getResumeSessionId(parsedUrl: URL): string | null {
 async function createResumeChatWindow(parsedUrl: URL, dir?: string): Promise<boolean> {
   const resumeSessionId = getResumeSessionId(parsedUrl);
   if (!resumeSessionId) {
-    log.warn('[Main] Ignoring goose://resume URL without a session id');
+    log.warn('[Main] Ignoring codyno://resume URL without a session id');
     return false;
   }
 
@@ -763,7 +765,7 @@ app.on('open-url', async (_event, url) => {
 app.on('will-finish-launching', () => {
   if (process.platform === 'darwin') {
     app.setAboutPanelOptions({
-      applicationName: 'Goose',
+      applicationName: 'CodyNo',
       applicationVersion: app.getVersion(),
     });
   }
@@ -818,7 +820,7 @@ async function handleFileOpen(filePath: string) {
 
     // Show user-friendly error notification
     new Notification({
-      title: 'Goose',
+      title: 'CodyNo',
       body: `Could not open directory: ${path.basename(filePath)}`,
     }).show();
   }
@@ -1228,10 +1230,10 @@ const createChat = async (
       log.error('goose serve failed to start', error);
       dialog.showMessageBoxSync({
         type: 'error',
-        title: 'Goose Failed to Start',
+          title: 'CodyNo Failed to Start',
         message: 'The backend server failed to start.',
         detail: [
-          'Backend: goose serve',
+          'Backend: CodyNo local service',
           'Readiness check: HTTPS GET /status',
           `Startup error:\n${errorMessage(error)}`,
         ].join('\n\n'),
@@ -1273,6 +1275,7 @@ const createChat = async (
 
     mainWindow = new BrowserWindow({
       show: false,
+      title: 'CodyNo',
       titleBarStyle: process.platform === 'darwin' ? 'hidden' : 'default',
       trafficLightPosition: process.platform === 'darwin' ? { x: 20, y: 16 } : undefined,
       vibrancy: process.platform === 'darwin' ? 'window' : undefined,
@@ -1928,6 +1931,35 @@ ipcMain.handle('open-external', async (event, url: string) => {
   return openExternalUrl(url, senderWindow, getConfiguredGooseLocale());
 });
 
+ipcMain.handle('codyno-device-auth-start', async () => {
+  const response = await net.fetch(CODYNO_DEVICE_AUTH_URL, {
+    method: 'POST',
+    headers: { 'User-Agent': `CodyNo-Desktop/${app.getVersion()}` },
+  });
+  const body = (await response.json()) as Record<string, unknown>;
+  if (!response.ok) {
+    throw new Error(typeof body.error === 'string' ? body.error : 'Could not start CodyNo sign-in');
+  }
+  return body;
+});
+
+ipcMain.handle('codyno-device-auth-poll', async (_event, code: string) => {
+  if (!/^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)) {
+    throw new Error('Invalid CodyNo sign-in code');
+  }
+  const response = await net.fetch(`${CODYNO_DEVICE_AUTH_URL}/${encodeURIComponent(code)}`, {
+    headers: { 'User-Agent': `CodyNo-Desktop/${app.getVersion()}` },
+  });
+  const text = await response.text();
+  let body: unknown;
+  try {
+    body = text ? JSON.parse(text) : null;
+  } catch {
+    body = null;
+  }
+  return { status: response.status, body };
+});
+
 ipcMain.handle('directory-chooser', async () => {
   return dialog.showOpenDialog({
     properties: ['openDirectory', 'createDirectory'],
@@ -2556,7 +2588,7 @@ async function appMain() {
 
   const shortcuts = getKeyboardShortcuts(settings);
 
-  const appMenu = menu?.items.find((item) => item.label === 'Goose');
+  const appMenu = menu?.items.find((item) => item.label === 'CodyNo');
   if (appMenu?.submenu) {
     appMenu.submenu.insert(1, new MenuItem({ type: 'separator' }));
     if (shortcuts.settings) {
@@ -2684,7 +2716,7 @@ async function appMain() {
     if (shortcuts.focusWindow) {
       fileMenu.submenu.append(
         new MenuItem({
-          label: menuT('Focus Goose Window'),
+          label: menuT('Focus CodyNo Window'),
           accelerator: shortcuts.focusWindow,
           click() {
             focusWindow();
@@ -2791,13 +2823,13 @@ async function appMain() {
         helpMenu.submenu.append(new MenuItem({ type: 'separator' }));
       }
 
-      // Create the About Goose menu item with a submenu
+      // Create the About CodyNo menu item with a submenu
       const aboutGooseMenuItem = new MenuItem({
-        label: menuT('About Goose'),
+        label: menuT('About CodyNo'),
         submenu: Menu.buildFromTemplate([]), // Start with an empty submenu for About
       });
 
-      // Add the Version menu item (display only) to the About Goose submenu
+      // Add the Version menu item (display only) to the About CodyNo submenu
       if (aboutGooseMenuItem.submenu) {
         aboutGooseMenuItem.submenu.append(
           new MenuItem({
@@ -3134,7 +3166,7 @@ app.whenReady().then(async () => {
   try {
     await appMain();
   } catch (error) {
-    dialog.showErrorBox('Goose Error', `Failed to create main window: ${error}`);
+    dialog.showErrorBox('CodyNo Error', `Failed to create main window: ${error}`);
     app.quit();
   }
 });

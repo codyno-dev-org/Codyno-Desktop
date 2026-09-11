@@ -240,7 +240,7 @@ pub fn show_extension_failures(failures: &[ExtensionFailure]) {
                 eprintln!(
                     "{}",
                     style(format!(
-                        "    Hint: ask goose to help debug the '{}' extension",
+                        "    Hint: ask CodyNo to help debug the '{}' extension",
                         label
                     ))
                     .dim()
@@ -1532,7 +1532,7 @@ pub fn display_session_info(
     println!(
         "  {}  {}",
         style("   L L").white(),
-        style("   goose is ready").white()
+        style("   CodyNo is ready").white()
     );
 }
 

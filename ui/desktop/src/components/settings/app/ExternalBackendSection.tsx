@@ -15,7 +15,7 @@ const i18n = defineMessages({
   description: {
     id: 'externalBackendSection.description',
     defaultMessage:
-      'By default Goose starts a local backend. Use this to connect to an external ACP-compatible backend.',
+      'By default CodyNo starts a local backend. Use this to connect to an external ACP-compatible backend.',
   },
   useExternalServer: {
     id: 'externalBackendSection.useExternalServer',
@@ -32,7 +32,7 @@ const i18n = defineMessages({
   serverUrlHelp: {
     id: 'externalBackendSection.serverUrlHelp',
     defaultMessage:
-      'Enter the HTTP(S) base URL. Goose checks /status and connects to /acp under this base.',
+      'Enter the HTTP(S) base URL. CodyNo checks /status and connects to /acp under this base.',
   },
   workingDir: {
     id: 'externalBackendSection.workingDir',
@@ -40,7 +40,7 @@ const i18n = defineMessages({
   },
   workingDirPlaceholder: {
     id: 'externalBackendSection.workingDirPlaceholder',
-    defaultMessage: '/home/goose/workspace',
+    defaultMessage: '/home/codyno/workspace',
   },
   workingDirHelp: {
     id: 'externalBackendSection.workingDirHelp',
@@ -74,7 +74,7 @@ const i18n = defineMessages({
   },
   restartNote: {
     id: 'externalBackendSection.restartNote',
-    defaultMessage: 'Changes apply to new chat windows. Restart Goose to update existing windows.',
+    defaultMessage: 'Changes apply to new chat windows. Restart CodyNo to update existing windows.',
   },
   urlProtocolError: {
     id: 'externalBackendSection.urlProtocolError',
