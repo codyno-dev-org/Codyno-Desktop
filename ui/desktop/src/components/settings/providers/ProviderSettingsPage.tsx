@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ScrollArea } from '../../ui/scroll-area';
 import BackButton from '../../ui/BackButton';
 import ProviderSelector from '../../onboarding/ProviderSelector';
@@ -23,6 +22,8 @@ const i18n = defineMessages({
     defaultMessage:
       'Manage the CodyNo account used by this desktop app. All model requests go through CodyNo.',
   },
+  // Kept in the catalog for translated locale parity; the connection state
+  // is rendered by ProviderSelector.
   connected: {
     id: 'providerSettings.connected',
     defaultMessage: 'CodyNo is connected',
@@ -41,10 +42,8 @@ export default function ProviderSettings({
   onProviderLaunched,
 }: ProviderSettingsProps) {
   const intl = useIntl();
-  const [connected, setConnected] = useState(false);
 
   const handleConfigured = async (_providerName: string, modelId?: string) => {
-    setConnected(true);
     onProviderLaunched?.(modelId);
   };
 
@@ -64,11 +63,6 @@ export default function ProviderSettings({
                 isOnboarding ? i18n.onboardingDescription : i18n.settingsDescription
               )}
             </p>
-            {connected && (
-              <p className="mt-4 text-sm text-green-600 dark:text-green-400">
-                {intl.formatMessage(i18n.connected)}
-              </p>
-            )}
           </div>
         </div>
 

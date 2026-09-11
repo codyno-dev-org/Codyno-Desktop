@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, ExternalLink, LoaderCircle, LogIn } from 'lucide-react';
 import {
+  CODYNO_PROVIDER_ID,
+  acpListProviderSecrets,
   acpResolveCodyNoModel,
   acpSaveProviderConfig,
 } from '../../acp/providers';
 import { Button } from '../ui/button';
 import { defineMessages, useIntl } from '../../i18n';
 
-const CODYNO_PROVIDER_ID = 'litellm';
 const CODYNO_BASE_PATH = 'v1/chat/completions';
 const POLL_INTERVAL_MS = 2500;
 
@@ -115,7 +116,25 @@ export default function ProviderSelector({
   const authAttempt = useRef(0);
 
   useEffect(() => {
+    const attempt = ++authAttempt.current;
+    let cancelled = false;
+
+    void acpListProviderSecrets()
+      .then((secrets) => {
+        if (cancelled || authAttempt.current !== attempt) return;
+        const hasCodyNoCredential = secrets.some(
+          (secret) => secret.provider === CODYNO_PROVIDER_ID && secret.hasSecret
+        );
+        if (hasCodyNoCredential) {
+          setAuthState('connected');
+        }
+      })
+      .catch(() => {
+        // A failed status check should not prevent the user from signing in.
+      });
+
     return () => {
+      cancelled = true;
       authAttempt.current += 1;
     };
   }, []);
@@ -222,13 +241,22 @@ export default function ProviderSelector({
             </Button>
           </div>
         ) : authState === 'connected' ? (
-          <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
-            <CheckCircle2 size={16} />
-            {intl.formatMessage(i18n.connectedDescription)}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
+              <CheckCircle2 size={16} />
+              {intl.formatMessage(i18n.connectedDescription)}
+            </div>
+            <Button variant="outline" className="w-full" onClick={startSignIn} disabled={isBusy}>
+              {intl.formatMessage(i18n.signIn)}
+            </Button>
           </div>
         ) : (
           <Button className="w-full" onClick={startSignIn} disabled={isBusy}>
-            {authState === 'starting' ? <LoaderCircle className="animate-spin" size={16} /> : <LogIn size={16} />}
+            {authState === 'starting' ? (
+              <LoaderCircle className="animate-spin" size={16} />
+            ) : (
+              <LogIn size={16} />
+            )}
             {authState === 'starting'
               ? intl.formatMessage(i18n.signingIn)
               : authState === 'error'
