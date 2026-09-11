@@ -28,7 +28,10 @@ fn secrets_lock_path(path: &Path) -> PathBuf {
 }
 
 #[cfg(feature = "system-keyring")]
-const KEYRING_SERVICE: &str = "goose";
+// CodyNo must not share credentials with an installed Goose instance. The
+// filesystem paths are namespaced separately, so keep secure-storage entries
+// in the same CodyNo namespace as well.
+const KEYRING_SERVICE: &str = "codyno";
 #[cfg(feature = "system-keyring")]
 const KEYRING_USERNAME: &str = "secrets";
 pub const CONFIG_YAML_NAME: &str = "config.yaml";
