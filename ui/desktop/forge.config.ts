@@ -76,6 +76,22 @@ module.exports = {
   ],
   makers: [
     {
+      name: '@electron-forge/maker-squirrel',
+      platforms: ['win32'],
+      config: {
+        name: 'codyno',
+        authors: 'CodyNo',
+        owners: 'CodyNo',
+        description: 'CodyNo AI agent desktop app',
+        exe: 'CodyNo.exe',
+        setupExe: 'CodyNo-Setup.exe',
+        setupIcon: 'src/images/icon.ico',
+        iconUrl:
+          'https://raw.githubusercontent.com/codyno-dev-org/Codyno-Desktop/main/ui/desktop/src/images/icon.ico',
+        noMsi: true,
+      },
+    },
+    {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin', 'win32', 'linux'],
       config: {

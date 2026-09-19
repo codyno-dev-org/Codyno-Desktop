@@ -105,15 +105,33 @@ jobs:
           New-Item -ItemType Directory -Force -Path $releaseDir | Out-Null
 
           $packages = @(Get-ChildItem -Path 'out/make' -Recurse -File -Filter '*.zip')
-          if ($packages.Count -eq 0) {
-            Write-Error 'No Windows package was produced'
+          $installers = @(Get-ChildItem -Path 'out/make' -Recurse -File -Filter '*Setup.exe')
+          $squirrelMetadata = @(
+            Get-ChildItem -Path 'out/make' -Recurse -File -Filter 'RELEASES'
+            Get-ChildItem -Path 'out/make' -Recurse -File -Filter '*-full.nupkg'
+          )
+
+          if ($packages.Count -eq 0 -or $installers.Count -eq 0) {
+            Write-Error 'No Windows ZIP and installer were produced'
           }
 
           foreach ($package in $packages) {
             Copy-Item $package.FullName (Join-Path $releaseDir "CodyNo-windows-x64-$($package.Name)")
           }
 
-          $hashes = Get-ChildItem -Path $releaseDir -File -Filter '*.zip' | ForEach-Object {
+          foreach ($installer in $installers) {
+            Copy-Item $installer.FullName (Join-Path $releaseDir 'CodyNo-windows-x64-Setup.exe')
+          }
+
+          # Squirrel needs RELEASES and the full NuGet package alongside Setup.exe
+          # when the installer is distributed through a release asset page.
+          foreach ($metadata in $squirrelMetadata) {
+            Copy-Item $metadata.FullName (Join-Path $releaseDir $metadata.Name)
+          }
+
+          $hashes = Get-ChildItem -Path $releaseDir -File | Where-Object {
+            $_.Name -ne 'SHA256SUMS-windows-x64.txt'
+          } | Sort-Object Name | ForEach-Object {
             $hash = (Get-FileHash -Algorithm SHA256 -Path $_.FullName).Hash.ToLowerInvariant()
             "$hash  $($_.Name)"
           }
