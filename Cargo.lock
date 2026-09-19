@@ -5152,7 +5152,7 @@ dependencies = [
 
 [[package]]
 name = "goose"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "agent-client-protocol",
  "agent-client-protocol-http",
@@ -5318,7 +5318,7 @@ dependencies = [
 
 [[package]]
 name = "goose-cli"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "agent-client-protocol",
  "anstream",
